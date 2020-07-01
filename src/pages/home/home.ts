@@ -55,7 +55,10 @@ drawTriangle() : void
    this._CONTEXT.lineTo(this._CANVAS.width/2 -100, this._CANVAS.height/2 + 100);
    this._CONTEXT.lineWidth   = 1;
    this._CONTEXT.strokeStyle = '#ffffff';
+  
    this._CONTEXT.stroke();
+
+   
 }
 
 
@@ -78,9 +81,6 @@ cargaimagen() : void
    this._CONTEXT.drawImage(img2, 1090, 1090);
    this._CONTEXT.stroke();
   
-
-
-
    };
 
    img.src = 'https://mdn.mozillademos.org/files/5395/backdrop.png';
@@ -88,7 +88,14 @@ cargaimagen() : void
 }
 
 
+vertexto()
+{
+  this.clearCanvas();
+  this._CONTEXT = this._CANVAS.getContext('2d');
+  this._CONTEXT.font = '48px serif';
+   this._CONTEXT.strokeText('Hola soy un texto, puedes leereme, me llamo letra.', 50, 50);
 
+}
 
 
 
@@ -100,6 +107,9 @@ setupCanvas()
   var pat =  this._CONTEXT.createPattern(img3, "repeat"); 
    this._CONTEXT.fillStyle = pat;
    this._CONTEXT.fillRect(0, 0, 1900, 1900);
+
+
+
 
 }
 clearCanvas()
