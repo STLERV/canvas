@@ -8,11 +8,15 @@ import {AfterViewInit}from '@angular/core';
   templateUrl: 'home.html'
 })
 export class HomePage  {
+
+
   @ViewChild('canvas') canvasEl : ElementRef;
   private _CANVAS  : any;
   public _CONTEXT : any;
+  
 
   public context: CanvasRenderingContext2D;
+
 
 
   constructor(public navCtrl: NavController) {
@@ -22,7 +26,6 @@ export class HomePage  {
 
     
 }
-
 
 
   ionViewDidLoad() 
@@ -68,7 +71,9 @@ cargaimagen() : void
 
   console.log('jiji');
    var img = new Image();
+   //img.setAttribute('crossorigin', 'anonymous');
    var img2= new Image();
+   //img2.setAttribute('crossorigin', 'anonymous');
    this.clearCanvas();
   
    img.onload = ()=> {
@@ -79,7 +84,7 @@ cargaimagen() : void
 
    this._CONTEXT.drawImage(img, x, y);
    this._CONTEXT.drawImage(img2, 1090, 1090);
-   this._CONTEXT.stroke();
+    this._CONTEXT.stroke();
   
    };
 
@@ -93,7 +98,7 @@ vertexto()
   this.clearCanvas();
   this._CONTEXT = this._CANVAS.getContext('2d');
   this._CONTEXT.font = '48px serif';
-   this._CONTEXT.strokeText('Hola soy un texto, puedes leereme, me llamo letra.', 50, 50);
+     this._CONTEXT.strokeText('Hola soy un texto, puedes leereme, me llamo letras.', 50, 50);
 
 }
 
@@ -102,12 +107,21 @@ vertexto()
 setupCanvas()
 { 
   var img3 = new Image();
+  //img3.setAttribute('crossorigin', 'anonymous');
   img3.src = 'https://static.vecteezy.com/system/resources/previews/000/263/062/non_2x/cartoon-spring-or-summer-landscape-vector.jpg';
   this._CONTEXT = this._CANVAS.getContext('2d');
+  
   var pat =  this._CONTEXT.createPattern(img3, "repeat"); 
    this._CONTEXT.fillStyle = pat;
    this._CONTEXT.fillRect(0, 0, 1900, 1900);
 
+
+}
+guardarcanvas(){
+
+
+   var micanvas  = document.getElementById("micanvas") as HTMLCanvasElement;
+   var dataURL = micanvas.toDataURL();
 
 
 

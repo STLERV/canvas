@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <div class="ion-canvas">
-    <canvas #canvas></canvas>
+    <canvas #canvas id = "micanvas"></canvas>
   </div>
   <button ion-button color="primary" (click)="drawTriangle()">
     dibuja un triangulo
@@ -20,4 +20,8 @@
   <button ion-button color="primary" (click)="vertexto()">
    ver texto
    </button>
+   <button ion-button color="primary" (click)="guardarcanvas()">
+    guardarcanvas
+    </button>
+ 
 </ion-content>
