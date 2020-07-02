@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <div class="ion-canvas">
-    <canvas #canvas id = "micanvas"></canvas>
+    <canvas #canvas id = "micanvas" (click)="fireEvent($event)"></canvas>
   </div>
   <button ion-button color="primary" (click)="drawTriangle()">
     dibuja un triangulo
@@ -20,8 +20,43 @@
   <button ion-button color="primary" (click)="vertexto()">
    ver texto
    </button>
-   <button ion-button color="primary" (click)="guardarcanvas()">
+   
+  <button ion-button color="primary" (click)="guardarcanvas()">
     guardarcanvas
     </button>
- 
+
+
+
+
+
+   <ion-row>  <ion-col size-md="6" offset-md="3">
+
+
+    <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h3>Elije una foto</h3>            
+              <div class="form-group">
+                  <input type="file" name="image" (change)="fileProgress($event)" />
+              </div>
+              <div *ngIf="fileUploadProgress">
+                  Upload progress: {{ fileUploadProgress }}
+              </div>
+              <div class="image-preview mb-3" *ngIf="previewUrl">
+                  <img [src]="previewUrl" height="300" />                 
+              </div>
+   
+              <div class="mb-3" *ngIf="uploadedFilePath">
+                  {{uploadedFilePath}}
+              </div>
+               
+              <div class="form-group">
+                  <button class="btn btn-primary"  (click)="onSubmit()">Guardar foto</button>
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+
+  </ion-col> </ion-row>
 </ion-content>
