@@ -4,6 +4,7 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { renderTemplate } from '@angular/core/src/render3/instructions';
 import { Observable } from 'rxjs/Observable';
+import { NodeData } from '@angular/core/src/view';
 
 @Component({
    selector: 'page-home',
@@ -31,7 +32,7 @@ export class HomePage {
    imagenCargadaWidth: any;
    imagenCargadaHeight: any;
 
-
+   modoDeCarga: string = "Nada";
 
    imagen: any;
 
@@ -89,6 +90,11 @@ export class HomePage {
    }
 
 
+
+   putTextCentrado(texto: string){
+
+
+   }
 
    drawTriangle(): void {
       this.clearCanvas();

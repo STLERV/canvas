@@ -15,44 +15,64 @@
     dibuja un triangulo
   </button>
   <button ion-button color="primary" (click)="cargaimagen()">
-   cargaimagen
+    cargaimagen
   </button>
   <button ion-button color="primary" (click)="vertexto()">
-   ver texto
-   </button>
+    ver texto
+  </button>
 
 
 
 
 
-   <ion-row>  <ion-col size-md="6" offset-md="3">
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
 
 
-    <div class="container">
-      <div class="row">
+      <div class="container">
+        <div class="row">
           <div class="col-md-6 offset-md-3">
-              <h3>Elije una foto</h3>            
-              <div class="form-group">
-                  <input type="file" name="image" (change)="fileProgress($event)" />
-              </div>
-              <div *ngIf="fileUploadProgress">
-                  Upload progress: {{ fileUploadProgress }}
-              </div>
-              <div class="image-preview mb-3" *ngIf="previewUrl">
-                  <img [src]="previewUrl" height="300" />                 
-              </div>
-   
-              <div class="mb-3" *ngIf="uploadedFilePath">
-                  {{uploadedFilePath}}
-              </div>
-               
-              <div class="form-group">
-                  <button class="btn btn-primary"  (click)="onSubmit()">Guardar foto</button>
-                  
-              </div>
-          </div>
-      </div>
-  </div>
+            <h3>Elije una foto</h3>
+            <div class="form-group">
+              <input type="file" name="image" (change)="fileProgress($event)" />
+            </div>
+            <div *ngIf="fileUploadProgress">
+              Upload progress: {{ fileUploadProgress }}
+            </div>
+            <div class="image-preview mb-3" *ngIf="previewUrl">
+              <img [src]="previewUrl" height="300" />
+            </div>
 
-  </ion-col> </ion-row>
+            <div class="mb-3" *ngIf="uploadedFilePath">
+              {{uploadedFilePath}}
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-primary" (click)="onSubmit()">Guardar foto</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+
+            <input type="text" #name placeholder="texto" class="form-control">
+            <button type="button" (click) = "putTextCentrado(texto.value)" class="btn btn-primary"> Carga el texto</button>
+          </div>
+        </div>
+      </div>
+
+    </ion-col>
+  </ion-row>
 </ion-content>
