@@ -7,23 +7,35 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-row>
+    <ion-col>
+      <div class="ion-canvas">
+        <canvas #canvas id="micanvas" (click)="fireEvent($event)"></canvas>
 
-  <div class="ion-canvas">
-    <canvas #canvas (click)="fireEvent($event)"></canvas>
-  </div>
-  <button ion-button color="primary" (click)="drawTriangle()">
-    dibuja un triangulo
-  </button>
-  <button ion-button color="primary" (click)="cargaimagen()">
-    cargaimagen
-  </button>
-  <button ion-button color="primary" (click)="vertexto()">
-    ver texto
-  </button>
+      </div>
+      <button ion-button color="primary" (click)="drawTriangle()">
+        dibuja un triangulo
+      </button>
+      <button ion-button color="primary" (click)="cargaimagen()">
+        cargaimagen
+      </button>
+      <button ion-button color="primary" (click)="vertexto()">
+        ver texto
+      </button>
 
+      <button ion-button color="primary" (click)="guardarcanvas()">
+        guardarcanvas
+      </button>
 
-
-
+      <button ion-button color="primary" (click)="clearCanvas()">
+        Reset
+      </button>
+      
+      <button ion-button color="primary" (click)="reconstruirEscena()">
+        Cargar Escena
+      </button>
+    </ion-col>
+  </ion-row>
 
   <ion-row>
     <ion-col size-md="6" offset-md="3">
@@ -65,14 +77,60 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-md-6 offset-md-3">
+          <div class="col-md-10 offset-md-10">
+            <form #form="ngForm" (ngSubmit)="putText(form)" method="post">
+              <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input ngModel type="name" name="name" placeholder="Texto"></ion-input>
+              </ion-item>
 
-            <input type="text" #name placeholder="texto" class="form-control">
-            <button type="button" (click) = "putTextCentrado(texto.value)" class="btn btn-primary"> Carga el texto</button>
+              <button type="submit" expand="full">Cargar texto</button>
+
+            </form>
+
+            <form #form2="ngForm" (ngSubmit)="putImage(form2)" method="post">
+              <ion-item>
+                <ion-label position="floating">URL</ion-label>
+                <ion-input ngModel type="name" name="name" placeholder="url"></ion-input>
+              </ion-item>
+
+              <button type="submit" expand="full">Cargar imagen</button>
+
+            </form>
+
+
           </div>
         </div>
       </div>
 
+      <ion-row>
+        <ion-col>
+          <button ion-button color="primary" (click)="drawImageFondoMario()">
+            Cargar fondo
+          </button>
+          <div (click)="cargarMario()">
+            <img
+              src="https://lh3.googleusercontent.com/proxy/dGyhQOktIvNaloENhf6oFvU3GteegJaCmyXGn1i3RacehXjsnF0KPhA39XP1hAy4UzSePELqw-8SEB9QmNZy6cXTF8E7zMwPk8oU8pLN5Id0wx03MYU">
+          </div>
+          <button ion-button color="primary" (click)="vertexto()">
+            Luigi
+          </button>
+
+          <button ion-button color="primary" (click)="guardarcanvas()">
+            guardarcanvas
+          </button>
+
+          <button ion-button color="primary" (click)='startTimer()'>Start Timer</button>
+          <button ion-button color="primary" (click)='pauseTimer()'>Pause</button>
+
+        </ion-col>
+      </ion-row>
+
+
     </ion-col>
   </ion-row>
+
+
+
+
 </ion-content>

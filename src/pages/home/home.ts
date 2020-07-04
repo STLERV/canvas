@@ -4,7 +4,16 @@ import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { renderTemplate } from '@angular/core/src/render3/instructions';
 import { Observable } from 'rxjs/Observable';
+import { NgForm } from '@angular/forms';
+import * as html2canvas from 'html2canvas'
+import { Storage } from '@ionic/storage';
+import { Escena } from '../../app/models/escena';
+import { Personaje } from '../../app/models/personaje'
+
+
+
 import { NodeData } from '@angular/core/src/view';
+import { transition } from '@angular/core/src/animation/dsl';
 
 @Component({
    selector: 'page-home',
@@ -32,14 +41,23 @@ export class HomePage {
    imagenCargadaWidth: any;
    imagenCargadaHeight: any;
 
-   modoDeCarga: string = "Nada";
-
    imagen: any;
+   pintar: boolean = false;
 
-   constructor(public navCtrl: NavController) {
+
+   MARIO_WIDTH: any = 32;
+   MARIO_HEIGHT: any = 39;
+
+   listaPersonaje: Personaje[] = [];
+   escena: Escena;
+
+   constructor(public navCtrl: NavController, public storage: Storage) {
 
    }
    ngOnInit() {
+
+
+      this.escena = new Escena();
 
 
    }
@@ -52,47 +70,85 @@ export class HomePage {
 
       this.initialiseCanvas();
 
-
-
    }
    initialiseCanvas() {
       if (this._CANVAS.getContext) {
          this.setupCanvas();
-
       }
    }
 
+   cargarMario() {
+      const img = new Image();
+      img.src = '../../assets/imgs/mario.png';
+      img.onload = () => {
+         this._CONTEXT = this._CANVAS.getContext('2d');
+
+         this._CONTEXT.drawImage(   // Image
+            img,
+            0,
+            0
+         );
+         this._CONTEXT.stroke();
+      };
+   }
 
    fireEvent(e) {
       console.log(e.type);
       console.log(e.x);
       console.log(e.y);
 
-      if(this.imagen.src){
-        var ima = new Image();
+      if (this.pintar == true) {
+         var ima = new Image();
 
-        ima.onload = ()=> {
 
+         ima.onload = () => {
             this._CONTEXT.beginPath();
-             var x =590;
-             var y =590;
-              this._CONTEXT.drawImage(this.imagen, e.x - this.imagenCargadaWidth/2, e.y - this.imagenCargadaHeight/2);
-              this._CONTEXT.stroke();
-              };
-              ima.src = this.imagen.src;
-            }
-            else{
-               console.log("No se ha cargado la imagen aun eh");
-            }
+            var x = 590;
+            var y = 590;
+            this._CONTEXT = this._CANVAS.getContext('2d');
+
+            this._CONTEXT.drawImage(this.imagen, e.x - this.imagenCargadaWidth / 2, e.y - this.imagenCargadaHeight / 2);
+            this._CONTEXT.stroke();
+         };
+         ima.src = this.imagen.src;
+         this.pintar = false;
+
+         var personaje = new Personaje();
+         personaje.id = 1;
+         personaje.foto = this.imagen.src;
+         personaje.positionX = e.x - this.imagenCargadaWidth / 2;
+         personaje.positionY = e.y - this.imagenCargadaHeight / 2;
+         personaje.tiempoEntrada = 0;
+         personaje.tiempoSalida = 100000000000;
+
+         this.listaPersonaje.push(personaje);
+         this.escena.personajes = this.listaPersonaje;
+      }
+      else {
+         console.log("No se ha cargado la imagen aun eh");
+
+         // var canvas = document.getElementById("micanvas");
+         // const myContext = canvas.getContext("2d");
+
+         // var ctx = this._CANVAS.getContext('2d');
+
+         // var canvasPosition = canvas.getBoundingClientRect();
+
+         // var x = e.clientX - canvasPosition.left;
+         // var y = e.clientY - canvasPosition.top;
+
+         // ctx.fillRect(x, y, 2, 2);
 
 
 
+      }
    }
 
+   putText(texto: NgForm) {
 
-
-   putTextCentrado(texto: string){
-
+      this._CONTEXT = this._CANVAS.getContext('2d');
+      this._CONTEXT.font = '48px serif';
+      this._CONTEXT.strokeText(texto.value.name, 50, 750);
 
    }
 
@@ -108,13 +164,42 @@ export class HomePage {
       this._CONTEXT.stroke();
    }
 
+   putImage(url: NgForm) {
+
+      this.pintar = true;
+      var imagen = new Image();
+      imagen.src = url.value.name;
+      // imagen.crossOrigin = "Anonymous";
+
+      this.imagen = imagen;
+
+      const image = {
+         url: url.value.name,
+         context: 'client context'
+      }
+      this.getImageDimension(image).subscribe(
+         response => {
+            console.log(response);
+            this.imagenCargadaHeight = response.height;
+            this.imagenCargadaWidth = response.width;
+         }
+      )
+   }
+
    cargaimagen(): void {
+
+      this.pintar = true;
       console.log('jiji');
       var img = new Image();
       var img2 = new Image();
 
-      this.imagen = new Image();
-      this.imagen.src = "https://assets.pokemon.com/assets/cms2/img/pokedex/full//037.png"
+      img.crossOrigin = "Anonymous";
+      img2.crossOrigin = "Anonymous";
+      var imagen = new Image();
+      imagen.src = "https://assets.pokemon.com/assets/cms2/img/pokedex/full//037.png";
+      // imagen.crossOrigin = "Anonymous";
+
+      this.imagen = imagen;
       this.clearCanvas();
 
       //    img.onload = ()=> {
@@ -136,14 +221,14 @@ export class HomePage {
       const image = {
          url: this.imagen.src,
          context: 'client context'
-       }
-       this.getImageDimension(image).subscribe(
-          response => { 
+      }
+      this.getImageDimension(image).subscribe(
+         response => {
             console.log(response);
             this.imagenCargadaHeight = response.height;
             this.imagenCargadaWidth = response.width;
-          }
-       );
+         }
+      );
    }
 
    vertexto() {
@@ -155,6 +240,7 @@ export class HomePage {
 
    setupCanvas() {
       var img3 = new Image();
+      img3.crossOrigin = "Anonymous";
       img3.src = 'https://static.vecteezy.com/system/resources/previews/000/263/062/non_2x/cartoon-spring-or-summer-landscape-vector.jpg';
       this._CONTEXT = this._CANVAS.getContext('2d');
       var pat = this._CONTEXT.createPattern(img3, "repeat");
@@ -199,27 +285,6 @@ export class HomePage {
    }
 
 
-
-
-
-   // getImgSize(imageSrc: string): Observable<ISize> {
-   //    let mapLoadedImage = (event): ISize => {
-   //       return {
-   //          width: event.target.width,
-   //          height: event.target.height
-   //       };
-   //    }
-   //    var image = new Image();
-   //    let $loadedImg = fromEvent(image, "load").pipe(take(1), map(mapLoadedImage));
-   //    // Rxjs 4 - let $loadedImg = Observable.fromEvent(image, "load").take(1).map(mapLoadedImage);
-   //    image.src = imageSrc;
-   //    return $loadedImg;
-   // }
-
-
-
-
-
    getImageDimension(image): Observable<any> {
       return new Observable(observer => {
          const img = new Image();
@@ -234,9 +299,142 @@ export class HomePage {
       });
    }
 
+
+   guardarcanvas() {
+
+
+      var micanvas = document.getElementById("micanvas") as HTMLCanvasElement;
+      var dataURL = micanvas.toDataURL();
+      console.log(dataURL);
+
+   }
+
+   drawImageFondoMario() {
+      var img3 = new Image();
+      img3.src = '../../assets/imgs/fondo1.jpg';
+      this._CONTEXT = this._CANVAS.getContext('2d');
+      var pat = this._CONTEXT.createPattern(img3, "repeat");
+      this._CONTEXT.fillStyle = pat;
+      this._CONTEXT.fillRect(0, 0, 1900, 1900);
+
+      this.escena.fondo = img3.src;
+
+   }
+
+
+   refreshFondo() {
+      var img3 = new Image();
+      img3.src = this.escena.fondo;
+      this._CONTEXT = this._CANVAS.getContext('2d');
+      var pat = this._CONTEXT.createPattern(img3, "repeat");
+      this._CONTEXT.fillStyle = pat;
+      this._CONTEXT.fillRect(0, 0, 1900, 1900);
+
+      this.escena.fondo = img3.src;
+
+   }
+
+   timeLeft: number = 60;
+   timeNow;
+   interval;
+
+
+   reconstruirEscena() {
+
+      var copiaEscena = this.escena;
+      var listaParaPintar = this.escena.personajes;
+      this.timeNow = 0;
+      this.interval = setInterval(() => {
+         if (this.timeLeft > 0) {
+            this.timeLeft--;
+            this.timeNow++;
+            copiaEscena.personajes.forEach(element => {
+               const img = new Image();
+
+               if (element.tiempoEntrada <= this.timeNow && element.pintado == false) {
+                  listaParaPintar.push(element);
+                  this.drawimages(listaParaPintar);
+                  element.pintado = true;
+               }
+
+
+               if (element.tiempoSalida <= this.timeNow && element.pintado == true) {
+                  listaParaPintar = listaParaPintar.filter(obj => obj.id !== element.id);
+                  this.drawimages(listaParaPintar);
+                  element.pintado == false;
+               }
+
+
+
+            });
+
+         } else {
+            this.timeLeft = 60;
+         }
+      }, 1)
+   }
+
+   drawimages(escena) {
+
+      this.clearCanvas();
+      this.refreshFondo();
+      escena.forEach(element => {
+         const img = new Image();
+         img.src = element.foto;
+         img.onload = () => {
+            this._CONTEXT = this._CANVAS.getContext('2d');
+
+            this._CONTEXT.drawImage(   // Image
+               img,
+               element.positionX,
+               element.positionY
+            );
+            this._CONTEXT.stroke();
+         }
+      });
+
+   }
+
+   startTimer() {
+      var frame = 0;
+
+      this.interval = setInterval(() => {
+         if (this.timeLeft > 0) {
+            this.timeLeft--;
+            this.clearCanvas(); 
+            this.drawImageFondoMario();
+            const img = new Image();
+            img.src = '../../assets/imgs/mario.png';
+            img.onload = () => {
+               this._CONTEXT = this._CANVAS.getContext('2d');
+
+               this._CONTEXT.drawImage(   // Image
+                  img,
+                  // ---- Selection ----
+                  this.MARIO_WIDTH * frame, // sx
+                  this.MARIO_HEIGHT * 2, // sy
+                  this.MARIO_WIDTH, // sWidth
+                  this.MARIO_HEIGHT, // sHeight
+                  0, // dx
+                  0, // dy
+                  this.MARIO_WIDTH * 5,
+                  this.MARIO_HEIGHT * 5
+               );
+               this._CONTEXT.stroke();
+               if (frame == 7) {
+                  frame = 0;
+               }
+               else {
+                  frame = frame + 1;
+               }
+            };
+         } else {
+            this.timeLeft = 60;
+         }
+      }, 100)
+   }
+
+   pauseTimer() {
+      clearInterval(this.interval);
+   }
 }
-
-
-
-
-
