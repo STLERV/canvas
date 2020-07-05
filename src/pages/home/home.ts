@@ -9,11 +9,14 @@ import * as html2canvas from 'html2canvas'
 import { Storage } from '@ionic/storage';
 import { Escena } from '../../app/models/escena';
 import { Personaje } from '../../app/models/personaje'
+import { Texto } from '../../app/models/textos'
+
 
 
 
 import { NodeData } from '@angular/core/src/view';
 import { transition } from '@angular/core/src/animation/dsl';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
    selector: 'page-home',
@@ -49,7 +52,25 @@ export class HomePage {
    MARIO_HEIGHT: any = 39;
 
    listaPersonaje: Personaje[] = [];
+   listaPersonajeEscenaActual: Personaje[] = [];
+   listaTexto: Texto[] = [];
+
+   tiempoSalida: any;
+   tiempoEntrada: any;
+   idPersonaje: any;
    escena: Escena;
+   dialogoActual: any;
+
+
+/*https://2img.net/h/i1211.photobucket.com/albums/cc438/Heavy128/SuperMario3DLand/Tanooki_Bowser_False.png
+https://i.ya-webdesign.com/images/sol-vector-png-5.png
+https://www.nintenderos.com/wp-content/uploads/2012/09/ice_mario.png
+https://imagenpng.com/wp-content/uploads/2015/08/Curiosidades-de-mario-brospng.png
+https://1.bp.blogspot.com/-QuppqorADgs/TxnqL6UFPLI/AAAAAAAABIk/0orRP7EjIiU/s1600/22823512924459048355510.png
+https://lh3.googleusercontent.com/proxy/UNf8EF579QOaVeOmoM2XISDy60-dBM3W0TK-A55IdH4X8HWp6jTMuj2noMLUFEPc1HumGswu1PzD9fKvRVfkXM3Gpe5BBzZ0KtstGTT1TbKCo1TYTFY
+https://lh3.googleusercontent.com/proxy/kVEGssAma8IYD09wZCx4H_a9-tuQlXWytuZD0121pQobjkNZ6NDlVR1dTxQwCTdxnnVoCl67yMD9kWID8BiDdcOSusah0pdF71HUsS8n7fK8llp1JI4
+https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mKeMvSmP2pG01xRFJ7S3vzAZoZH48MNWkWLdfZ1dSFBeC7aLLCHvVGke869xC4E396aFavhPjSCgE
+*/
 
    constructor(public navCtrl: NavController, public storage: Storage) {
 
@@ -58,8 +79,19 @@ export class HomePage {
 
 
       this.escena = new Escena();
+ 
 
+   }
 
+   borrarPersonajeEscena(personaje: Personaje, form: NgForm){
+
+      this.listaPersonaje.forEach(obj => {if(obj.id == personaje.id){
+         obj.tiempoSalida = form.value.tiempo;
+      }});
+      this.escena.personajes = this.listaPersonaje;
+
+      this.listaPersonajeEscenaActual = this.listaPersonajeEscenaActual.filter(obj => obj.id !== personaje.id);
+      this.drawimages(this.listaPersonajeEscenaActual);
    }
 
 
@@ -114,14 +146,15 @@ export class HomePage {
          this.pintar = false;
 
          var personaje = new Personaje();
-         personaje.id = 1;
+         personaje.id = this.idPersonaje;
          personaje.foto = this.imagen.src;
          personaje.positionX = e.x - this.imagenCargadaWidth / 2;
          personaje.positionY = e.y - this.imagenCargadaHeight / 2;
-         personaje.tiempoEntrada = 0;
-         personaje.tiempoSalida = 100000000000;
+         personaje.tiempoEntrada = this.tiempoEntrada;
+         personaje.tiempoSalida = 10000000000;
 
          this.listaPersonaje.push(personaje);
+         this.listaPersonajeEscenaActual.push(personaje);
          this.escena.personajes = this.listaPersonaje;
       }
       else {
@@ -144,28 +177,69 @@ export class HomePage {
       }
    }
 
-   putText(texto: NgForm) {
+   continuarEscena(){
 
-      this._CONTEXT = this._CANVAS.getContext('2d');
-      this._CONTEXT.font = '48px serif';
-      this._CONTEXT.strokeText(texto.value.name, 50, 750);
+      this.drawimages(this.listaPersonajeEscenaActual);
 
    }
 
+   putText(texto: NgForm) {
+
+      var dialogo = new Texto();
+      dialogo.texto = texto.value.name;
+      dialogo.tiempo = texto.value.tiempo;
+      
+      this.listaTexto.push(dialogo);
+      this.escena.textos = this.listaTexto;
+
+      this._CONTEXT.lineWidth = 2;
+      this._CONTEXT = this._CANVAS.getContext('2d');
+      this._CONTEXT.font = '48px serif';
+      this._CONTEXT.strokeText(texto.value.name, 50, 750);
+      this.dialogoActual = "";
+
+   }
+
+   dibujarDilogo() {
+
+      this._CONTEXT.lineWidth = 2;
+      this._CONTEXT = this._CANVAS.getContext('2d');
+      this._CONTEXT.font = '48px serif';
+      this._CONTEXT.strokeText(this.dialogoActual, 50, 750);
+
+   }
+
+
    drawTriangle(): void {
-      this.clearCanvas();
+      this.refreshFondo();
       this._CONTEXT.beginPath();
       this._CONTEXT.moveTo(this._CANVAS.width / 2 - 100, this._CANVAS.height / 2 + 100);
       this._CONTEXT.lineTo(this._CANVAS.width / 2 + 100, this._CANVAS.height / 2 + 100);
       this._CONTEXT.lineTo(this._CANVAS.width / 2, this._CANVAS.height / 2);
       this._CONTEXT.lineTo(this._CANVAS.width / 2 - 100, this._CANVAS.height / 2 + 100);
-      this._CONTEXT.lineWidth = 1;
+      this._CONTEXT.lineWidth = 10;
       this._CONTEXT.strokeStyle = '#ffffff';
+      this._CONTEXT.stroke();
+   }
+
+   lineaTexto(): void {
+      this._CONTEXT.beginPath();
+      // this._CONTEXT.moveTo(this._CANVAS.width / 2 - 100, this._CANVAS.height / 2 + 100);
+      this._CONTEXT.moveTo(0, 640);
+
+      this._CONTEXT.lineTo(this._CANVAS.width, 640);
+      // this._CONTEXT.lineTo(this._CANVAS.width / 2, this._CANVAS.height / 2);
+      // this._CONTEXT.lineTo(this._CANVAS.width / 2 - 100, this._CANVAS.height / 2 + 100);
+      this._CONTEXT.lineWidth = 10;
+      this._CONTEXT.strokeStyle = '#000000';
       this._CONTEXT.stroke();
    }
 
    putImage(url: NgForm) {
 
+
+      this.tiempoEntrada = url.value.tiempoentrada;
+      this.idPersonaje = url.value.id;
       this.pintar = true;
       var imagen = new Image();
       imagen.src = url.value.name;
@@ -250,7 +324,7 @@ export class HomePage {
    }
    clearCanvas() {
       this._CONTEXT.clearRect(0, 0, this._CANVAS.width, this._CANVAS.height);
-      this.setupCanvas();
+      // this.refreshFondo();
    }
 
 
@@ -342,7 +416,7 @@ export class HomePage {
    reconstruirEscena() {
 
       var copiaEscena = this.escena;
-      var listaParaPintar = this.escena.personajes;
+      var listaParaPintar = [];
       this.timeNow = 0;
       this.interval = setInterval(() => {
          if (this.timeLeft > 0) {
@@ -352,6 +426,8 @@ export class HomePage {
                const img = new Image();
 
                if (element.tiempoEntrada <= this.timeNow && element.pintado == false) {
+                  // var existe = listaParaPintar.filter(obj => obj.id == element.id);
+                  // if (existe == null || existe == undefined){ listaParaPintar.push(element); } 
                   listaParaPintar.push(element);
                   this.drawimages(listaParaPintar);
                   element.pintado = true;
@@ -361,12 +437,23 @@ export class HomePage {
                if (element.tiempoSalida <= this.timeNow && element.pintado == true) {
                   listaParaPintar = listaParaPintar.filter(obj => obj.id !== element.id);
                   this.drawimages(listaParaPintar);
-                  element.pintado == false;
+                  element.pintado = "fuera";
                }
 
-
-
             });
+
+            copiaEscena.textos.forEach(dialogo => {
+
+               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false)
+               {
+                  dialogo.escrito = true;
+                  this.dialogoActual = dialogo.texto
+
+                  this.drawimages(listaParaPintar);
+
+               }
+
+            })
 
          } else {
             this.timeLeft = 60;
@@ -378,6 +465,8 @@ export class HomePage {
 
       this.clearCanvas();
       this.refreshFondo();
+      this.lineaTexto();
+      this.dibujarDilogo();
       escena.forEach(element => {
          const img = new Image();
          img.src = element.foto;
@@ -401,7 +490,7 @@ export class HomePage {
       this.interval = setInterval(() => {
          if (this.timeLeft > 0) {
             this.timeLeft--;
-            this.clearCanvas(); 
+            this.clearCanvas();
             this.drawImageFondoMario();
             const img = new Image();
             img.src = '../../assets/imgs/mario.png';
