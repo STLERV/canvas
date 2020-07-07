@@ -132,7 +132,7 @@
 
         </form>
 
-        <button ion-button color="primary" (click)="drawImageFondoMario()">
+        <button ion-button color="primary" (click)="cargarfondo()">
           Cargar fondo
         </button>
         <div (click)="cargarMario()">
@@ -166,7 +166,7 @@
               <ion-row no-padding>
                <ion-col col-6 *ngFor="let fondo of listaFondos">
 
-                <img src={{fondo.src}} width="500" height="500">
+                <img src={{fondo.src}} width="500" height="500" (click)="Seleccionarfondo(this.fondo.src)" >
 
                </ion-col>
               </ion-row>

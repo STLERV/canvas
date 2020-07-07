@@ -40,6 +40,7 @@ export class HomePage {
 
    x: any;
    y: any;
+  srcq;
 
    fileData: File = null;
    previewUrl: any = null;
@@ -487,20 +488,20 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
       return dataURL;
    }
 
-   drawImageFondoMario() {
-      var img3 = new Image();
-      img3.src = '../../assets/imgs/fondo.png';
-      // img3.src = '../../assets/imgs/fondo1.jpg';
+   // drawImageFondoMario() {
+   //    var img3 = new Image();
+   //    img3.src = '../../assets/imgs/fondo.png';
+   //    // img3.src = '../../assets/imgs/fondo1.jpg';
 
 
-      this._CONTEXT = this._CANVAS.getContext('2d');
-      var pat = this._CONTEXT.createPattern(img3, "repeat");
-      this._CONTEXT.fillStyle = pat;
-      this._CONTEXT.fillRect(0, 0, 1900, 1900);
+   //    this._CONTEXT = this._CANVAS.getContext('2d');
+   //    var pat = this._CONTEXT.createPattern(img3, "repeat");
+   //    this._CONTEXT.fillStyle = pat;
+   //    this._CONTEXT.fillRect(0, 0, 1900, 1900);
 
-      this.escena.fondo = img3.src;
+   //    this.escena.fondo = img3.src;
 
-   }
+   // }
 
 
    refreshFondo() {
@@ -565,677 +566,7 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
       }, 1)
    }
 
-   cargaDemo() {
-
-      var brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = -200; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 0;
-      brujita.tiempoSalida = 300;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = -100; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 330;
-      brujita.tiempoSalida = 400;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 0; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 410;
-      brujita.tiempoSalida = 590;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 50; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 600;
-      brujita.tiempoSalida = 790;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 100; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 800;
-      brujita.tiempoSalida = 1010;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 150; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 1030;
-      brujita.tiempoSalida = 1200;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 200; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 1220;
-      brujita.tiempoSalida = 1400;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 250; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 1420;
-      brujita.tiempoSalida = 1620;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 300; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 1630;
-      brujita.tiempoSalida = 1800;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-
-
-      brujita = new Personaje();
-      brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      brujita.id = brujita;
-      brujita.positionX = 350; //0
-      brujita.positionY = 390; //555
-      brujita.tiempoEntrada = 1830;
-      brujita.tiempoSalida = 2000000000000000000000;
-      brujita.ancho = 122;
-      brujita.alto = 112;
-      brujita.positionEnImagenX = 22;
-      brujita.positionEnImagenY = 155;
-
-
-
-      this.listaPersonaje.push(brujita);
-      this.escena.personajes = this.listaPersonaje;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: Aquí hay luz...";
-      dialogo.tiempo = 0;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      dialogo = new Texto();
-      dialogo.texto = "Brujita: Ahg, como odio las cuevas, me duelen los pies de andar";
-      dialogo.tiempo = 700;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: Y encima estas dos van extremadamente lentas";
-      dialogo.tiempo = 1400;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: tantas armas y armaduras para nada...";
-      dialogo.tiempo = 1800;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: *suspira*";
-      dialogo.tiempo = 2200;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: ¡CHICAS, OS PODEIS DAR PRISA POR FAVOR!";
-      dialogo.tiempo = 2600;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Samurai: ¡QUE SÍ QUE SÍ, YA ESTAMOS!";
-      dialogo.tiempo = 3000;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = -200; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 3200;
-      samurai.tiempoSalida = 3400;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = -100; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 3450;
-      samurai.tiempoSalida = 3650;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = -50; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 3650;
-      samurai.tiempoSalida = 3850;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = 0; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 3860;
-      samurai.tiempoSalida = 4060;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = -200; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 3870;
-      reina.tiempoSalida = 4070;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = 50; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 4100;
-      samurai.tiempoSalida = 4300;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = -150; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 4110;
-      reina.tiempoSalida = 4310;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = 100; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 4330;
-      samurai.tiempoSalida = 4570;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = -100; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 4320;
-      reina.tiempoSalida = 4525;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = 150; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 4600;
-      samurai.tiempoSalida = 4800;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = -100; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 4610;
-      reina.tiempoSalida = 4780;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var samurai = new Personaje();
-      samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      samurai.id = samurai;
-      samurai.positionX = 200; //0
-      samurai.positionY = 390; //555
-      samurai.tiempoEntrada = 4810;
-      samurai.tiempoSalida = 22222222222;
-      samurai.ancho = 97;
-      samurai.alto = 106;
-      samurai.positionEnImagenX = 374;
-      samurai.positionEnImagenY = 158;
-
-
-
-      this.listaPersonaje.push(samurai);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = -50; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 4820;
-      reina.tiempoSalida = 5020;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = 0; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 5030;
-      reina.tiempoSalida = 5200;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-      var reina = new Personaje();
-      reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
-      reina.id = reina;
-      reina.positionX = 50; //0
-      reina.positionY = 340; //555
-      reina.tiempoEntrada = 5230;
-      reina.tiempoSalida = 22222222222222222222;
-      reina.ancho = 101;
-      reina.alto = 139;
-      reina.positionEnImagenX = 147;
-      reina.positionEnImagenY = 127;
-
-      this.listaPersonaje.push(reina);
-      this.escena.personajes = this.listaPersonaje;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Samurai: No sé porque siempre tienes que ir corriendo de un sitio a otro";
-      dialogo.tiempo = 5250;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: El problema es que tú vas muy despacio";
-      dialogo.tiempo = 5650;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Samurai: Pues mira que cuando entrenamos, siempre dices que vaya más despacio...";
-      dialogo.tiempo = 6050;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: ¡ESO ES MENTIRA!";
-      dialogo.tiempo = 6500;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Reina: ¡OS PODEIS CENTRAR DE UNA VEZ!";
-      dialogo.tiempo = 7000;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Brujita: Tienes razón, será mejor centrarse";
-      dialogo.tiempo = 7500;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "BRRRRRRRRRRRRRRUUUUUUUUUUUUUUMM ";
-      dialogo.tiempo = 8000;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Reina: ¿Qué ha sido ese ruido ?";
-      dialogo.tiempo = 8500;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-
-      var monstruo = new Personaje();
-      monstruo.foto = '../../assets/imgs/Sprite_example_neoriceisgood.png';
-      monstruo.id = "monstruo";
-      monstruo.positionX = 700; //0
-      monstruo.positionY = 180; //555
-      monstruo.tiempoEntrada = 9000; //9000
-      monstruo.tiempoSalida = 22222222222222222222;
-      monstruo.ancho = 72;
-      monstruo.alto = 74;
-      monstruo.positionEnImagenX = 131;
-      monstruo.positionEnImagenY = 9;
-
-      this.listaPersonaje.push(monstruo);
-      this.escena.personajes = this.listaPersonaje;
-
-
-      var dialogo = new Texto();
-      dialogo.texto = "Monstruo: ¡BRUUUUUUAAAAAAAAAAAAAAAH!";
-      dialogo.tiempo = 9010;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Samurai: ¿De donde ha salido? No lo he visto ni llegar";
-      dialogo.tiempo = 9500;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "Reina: ¡CUIDADO, AL ATAQUE!";
-      dialogo.tiempo = 10000;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-
-      var dialogo = new Texto();
-      dialogo.texto = "CONTINUARÁ";
-      dialogo.tiempo = 10500;
-      this.listaTexto.push(dialogo);
-      this.escena.textos = this.listaTexto;
-   }
-
-
-   reconstruirEscenaOnePicture() {
-
-      this.cargaDemo();
-
-      var copiaEscena = this.escena;
-      var listaParaPintar = [];
-      this.timeNow = 0;
-      this.interval = setInterval(() => {
-         if (this.timeLeft > 0) {
-            this.timeLeft--;
-            this.timeNow++;
-            copiaEscena.personajes.forEach(element => {
-               const img = new Image();
-
-               if (element.tiempoEntrada <= this.timeNow && element.pintado == false) {
-                  // var existe = listaParaPintar.filter(obj => obj.id == element.id);
-                  // if (existe == null || existe == undefined){ listaParaPintar.push(element); } 
-                  listaParaPintar.push(element);
-                  this.drawimagesInOnePicture(listaParaPintar);
-                  element.pintado = true;
-               }
-
-
-               if (element.tiempoSalida <= this.timeNow && element.pintado == true) {
-                  listaParaPintar = listaParaPintar.filter(obj => obj.id !== element.id);
-                  this.drawimagesInOnePicture(listaParaPintar);
-                  element.pintado = "fuera";
-               }
-
-            });
-
-            copiaEscena.textos.forEach(dialogo => {
-
-               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false) {
-                  dialogo.escrito = true;
-                  this.dialogoActual = dialogo.texto
-
-                  this.drawimagesInOnePicture(listaParaPintar);
-
-               }
-
-            })
-
-         } else {
-            this.timeLeft = 60;
-         }
-      }, 1)
-   }
-
-   drawimages(escena) {
-
-      this.clearCanvas();
-      this.refreshFondo();
-      this.lineaTexto();
-      this.dibujarDilogo();
-      escena.forEach(element => {
-         const img = new Image();
-         img.src = element.foto;
-         img.onload = () => {
-            this._CONTEXT = this._CANVAS.getContext('2d');
-
-            this._CONTEXT.drawImage(   // Image
-               img,
-               element.positionX,
-               element.positionY
-            );
-            this._CONTEXT.stroke();
-         }
-      });
-
-   }
-
-
-   drawimagesInOnePicture(escena) {
-
-      this.clearCanvas();
-      this.refreshFondo();
-      this.lineaTexto();
-      this.dibujarDilogo();
-      escena.forEach(element => {
-         var zoomAncho = element.ancho * 2;
-         var zoomAlto = element.alto * 2;
-         if (element.id == "monstruo") {
-            var zoomAncho = element.ancho * 6.5;
-            var zoomAlto = element.alto * 6.5;
-         }
-
-         const img = new Image();
-         img.src = element.foto;
-         img.onload = () => {
-            this._CONTEXT = this._CANVAS.getContext('2d');
-
-            this._CONTEXT.drawImage(   // Image
-               img,
-               element.positionEnImagenX,
-               element.positionEnImagenY,
-               element.ancho,
-               element.alto,
-               element.positionX,
-               element.positionY,
-               zoomAncho,
-               zoomAlto
-            );
-            this._CONTEXT.stroke();
-         }
-      });
-
-   }
+   
 
    //Esto es un ejemplo de como pillar un mini mario en una imagen con muchos marios y medio animarlo
 
@@ -1250,6 +581,721 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
       oculta(){
 
          this.muestrame = false;
+      }
+
+
+
+      cargarfondo() {
+         var img3 = new Image();
+
+         img3.src = this.srcq;
+         // img3.src = '../../assets/imgs/fondo1.jpg';
+   
+         this.clearCanvas();
+         this._CONTEXT = this._CANVAS.getContext('2d');
+         var pat = this._CONTEXT.createPattern(img3, "repeat");
+         this._CONTEXT.fillStyle = pat;
+         this._CONTEXT.fillRect(0, 0, 1900, 1900);
+   
+         this.escena.fondo = img3.src;
+   
+      }
+ 
+      Seleccionarfondo(src){
+         
+      this.srcq = src;
+
+         
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      cargaDemo() {
+
+         var brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = -200; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 0;
+         brujita.tiempoSalida = 300;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = -100; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 330;
+         brujita.tiempoSalida = 400;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 0; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 410;
+         brujita.tiempoSalida = 590;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 50; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 600;
+         brujita.tiempoSalida = 790;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 100; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 800;
+         brujita.tiempoSalida = 1010;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 150; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 1030;
+         brujita.tiempoSalida = 1200;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 200; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 1220;
+         brujita.tiempoSalida = 1400;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 250; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 1420;
+         brujita.tiempoSalida = 1620;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 300; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 1630;
+         brujita.tiempoSalida = 1800;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+   
+         brujita = new Personaje();
+         brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         brujita.id = brujita;
+         brujita.positionX = 350; //0
+         brujita.positionY = 390; //555
+         brujita.tiempoEntrada = 1830;
+         brujita.tiempoSalida = 2000000000000000000000;
+         brujita.ancho = 122;
+         brujita.alto = 112;
+         brujita.positionEnImagenX = 22;
+         brujita.positionEnImagenY = 155;
+   
+   
+   
+         this.listaPersonaje.push(brujita);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: Aquí hay luz...";
+         dialogo.tiempo = 0;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         dialogo = new Texto();
+         dialogo.texto = "Brujita: Ahg, como odio las cuevas, me duelen los pies de andar";
+         dialogo.tiempo = 700;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: Y encima estas dos van extremadamente lentas";
+         dialogo.tiempo = 1400;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: tantas armas y armaduras para nada...";
+         dialogo.tiempo = 1800;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: *suspira*";
+         dialogo.tiempo = 2200;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: ¡CHICAS, OS PODEIS DAR PRISA POR FAVOR!";
+         dialogo.tiempo = 2600;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Samurai: ¡QUE SÍ QUE SÍ, YA ESTAMOS!";
+         dialogo.tiempo = 3000;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = -200; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 3200;
+         samurai.tiempoSalida = 3400;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = -100; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 3450;
+         samurai.tiempoSalida = 3650;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = -50; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 3650;
+         samurai.tiempoSalida = 3850;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = 0; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 3860;
+         samurai.tiempoSalida = 4060;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = -200; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 3870;
+         reina.tiempoSalida = 4070;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+   
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = 50; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 4100;
+         samurai.tiempoSalida = 4300;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = -150; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 4110;
+         reina.tiempoSalida = 4310;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = 100; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 4330;
+         samurai.tiempoSalida = 4570;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = -100; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 4320;
+         reina.tiempoSalida = 4525;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+   
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = 150; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 4600;
+         samurai.tiempoSalida = 4800;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = -100; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 4610;
+         reina.tiempoSalida = 4780;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+   
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var samurai = new Personaje();
+         samurai.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         samurai.id = samurai;
+         samurai.positionX = 200; //0
+         samurai.positionY = 390; //555
+         samurai.tiempoEntrada = 4810;
+         samurai.tiempoSalida = 22222222222;
+         samurai.ancho = 97;
+         samurai.alto = 106;
+         samurai.positionEnImagenX = 374;
+         samurai.positionEnImagenY = 158;
+   
+   
+   
+         this.listaPersonaje.push(samurai);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = -50; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 4820;
+         reina.tiempoSalida = 5020;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = 0; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 5030;
+         reina.tiempoSalida = 5200;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+         var reina = new Personaje();
+         reina.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
+         reina.id = reina;
+         reina.positionX = 50; //0
+         reina.positionY = 340; //555
+         reina.tiempoEntrada = 5230;
+         reina.tiempoSalida = 22222222222222222222;
+         reina.ancho = 101;
+         reina.alto = 139;
+         reina.positionEnImagenX = 147;
+         reina.positionEnImagenY = 127;
+   
+         this.listaPersonaje.push(reina);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Samurai: No sé porque siempre tienes que ir corriendo de un sitio a otro";
+         dialogo.tiempo = 5250;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: El problema es que tú vas muy despacio";
+         dialogo.tiempo = 5650;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Samurai: Pues mira que cuando entrenamos, siempre dices que vaya más despacio...";
+         dialogo.tiempo = 6050;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: ¡ESO ES MENTIRA!";
+         dialogo.tiempo = 6500;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Reina: ¡OS PODEIS CENTRAR DE UNA VEZ!";
+         dialogo.tiempo = 7000;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Brujita: Tienes razón, será mejor centrarse";
+         dialogo.tiempo = 7500;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "BRRRRRRRRRRRRRRUUUUUUUUUUUUUUMM ";
+         dialogo.tiempo = 8000;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Reina: ¿Qué ha sido ese ruido ?";
+         dialogo.tiempo = 8500;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+   
+         var monstruo = new Personaje();
+         monstruo.foto = '../../assets/imgs/Sprite_example_neoriceisgood.png';
+         monstruo.id = "monstruo";
+         monstruo.positionX = 700; //0
+         monstruo.positionY = 180; //555
+         monstruo.tiempoEntrada = 9000; //9000
+         monstruo.tiempoSalida = 22222222222222222222;
+         monstruo.ancho = 72;
+         monstruo.alto = 74;
+         monstruo.positionEnImagenX = 131;
+         monstruo.positionEnImagenY = 9;
+   
+         this.listaPersonaje.push(monstruo);
+         this.escena.personajes = this.listaPersonaje;
+   
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Monstruo: ¡BRUUUUUUAAAAAAAAAAAAAAAH!";
+         dialogo.tiempo = 9010;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Samurai: ¿De donde ha salido? No lo he visto ni llegar";
+         dialogo.tiempo = 9500;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "Reina: ¡CUIDADO, AL ATAQUE!";
+         dialogo.tiempo = 10000;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+   
+         var dialogo = new Texto();
+         dialogo.texto = "CONTINUARÁ";
+         dialogo.tiempo = 10500;
+         this.listaTexto.push(dialogo);
+         this.escena.textos = this.listaTexto;
+      }
+   
+   
+      reconstruirEscenaOnePicture() {
+   
+         this.cargaDemo();
+   
+         var copiaEscena = this.escena;
+         var listaParaPintar = [];
+         this.timeNow = 0;
+         this.interval = setInterval(() => {
+            if (this.timeLeft > 0) {
+               this.timeLeft--;
+               this.timeNow++;
+               copiaEscena.personajes.forEach(element => {
+                  const img = new Image();
+   
+                  if (element.tiempoEntrada <= this.timeNow && element.pintado == false) {
+                     // var existe = listaParaPintar.filter(obj => obj.id == element.id);
+                     // if (existe == null || existe == undefined){ listaParaPintar.push(element); } 
+                     listaParaPintar.push(element);
+                     this.drawimagesInOnePicture(listaParaPintar);
+                     element.pintado = true;
+                  }
+   
+   
+                  if (element.tiempoSalida <= this.timeNow && element.pintado == true) {
+                     listaParaPintar = listaParaPintar.filter(obj => obj.id !== element.id);
+                     this.drawimagesInOnePicture(listaParaPintar);
+                     element.pintado = "fuera";
+                  }
+   
+               });
+   
+               copiaEscena.textos.forEach(dialogo => {
+   
+                  if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false) {
+                     dialogo.escrito = true;
+                     this.dialogoActual = dialogo.texto
+   
+                     this.drawimagesInOnePicture(listaParaPintar);
+   
+                  }
+   
+               })
+   
+            } else {
+               this.timeLeft = 60;
+            }
+         }, 1)
+      }
+   
+      drawimages(escena) {
+   
+         this.clearCanvas();
+         this.refreshFondo();
+         this.lineaTexto();
+         this.dibujarDilogo();
+         escena.forEach(element => {
+            const img = new Image();
+            img.src = element.foto;
+            img.onload = () => {
+               this._CONTEXT = this._CANVAS.getContext('2d');
+   
+               this._CONTEXT.drawImage(   // Image
+                  img,
+                  element.positionX,
+                  element.positionY
+               );
+               this._CONTEXT.stroke();
+            }
+         });
+   
+      }
+   
+   
+      drawimagesInOnePicture(escena) {
+   
+         this.clearCanvas();
+         this.refreshFondo();
+         this.lineaTexto();
+         this.dibujarDilogo();
+         escena.forEach(element => {
+            var zoomAncho = element.ancho * 2;
+            var zoomAlto = element.alto * 2;
+            if (element.id == "monstruo") {
+               var zoomAncho = element.ancho * 6.5;
+               var zoomAlto = element.alto * 6.5;
+            }
+   
+            const img = new Image();
+            img.src = element.foto;
+            img.onload = () => {
+               this._CONTEXT = this._CANVAS.getContext('2d');
+   
+               this._CONTEXT.drawImage(   // Image
+                  img,
+                  element.positionEnImagenX,
+                  element.positionEnImagenY,
+                  element.ancho,
+                  element.alto,
+                  element.positionX,
+                  element.positionY,
+                  zoomAncho,
+                  zoomAlto
+               );
+               this._CONTEXT.stroke();
+            }
+         });
+   
       }
 
 }
