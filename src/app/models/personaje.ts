@@ -7,7 +7,12 @@ export class Personaje {
     tiempoSalida: any;
     positionX: any;
     positionY: any;
+    positionEnImagenX: any;
+    positionEnImagenY: any;
+    ancho: any;
+    alto: any;
     pintado: any;
+
 
 
     constructor(
@@ -17,7 +22,11 @@ export class Personaje {
         tiempoSalida = '',
         positionX = '',
         positionY = '',
-        pintado = false
+        pintado = false,
+        positionEnImagenX = '',
+        positionEnImagenY = '',
+        ancho = '',
+        alto = ''
 
     ) {
 
@@ -27,7 +36,11 @@ export class Personaje {
             this.tiempoSalida = tiempoSalida,
             this.positionX = positionX,
             this.positionY = positionY
-            this.pintado = pintado
+            this.pintado = pintado,
+            this.positionEnImagenX = positionEnImagenX,
+            this.positionEnImagenY = positionEnImagenY,
+            this.ancho = ancho,
+            this.alto = alto
 
     }
 }
