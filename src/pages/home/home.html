@@ -41,6 +41,10 @@
       <button ion-button color="primary" (click)="continuarEscena()">
         Continuar escena
       </button>
+
+      <button ion-button color="primary" (click)="reconstruirEscenaOnePicture()">
+        Escena demo
+      </button>
     </ion-col>
   </ion-row>
 
@@ -50,7 +54,7 @@
 
       <ion-col size-md="2" offset-md="3">
         <h3>Personajes en escena</h3>
-        <div *ngFor="let personaje of listaPersonajeEscenaActual"> 
+        <div *ngFor="let personaje of listaPersonajeEscenaActual">
           <ion-col align-self-center text-center>
             <form #form3="ngForm" (ngSubmit)="borrarPersonajeEscena(personaje,form3)" method="post">
               <ion-item>
@@ -66,7 +70,7 @@
               </button>
 
             </form>
-         
+
           </ion-col>
         </div>
       </ion-col>
@@ -75,7 +79,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <h3>Elije una foto</h3>
+            <h3>Subir foto desde ordenador</h3>
             <div class="form-group">
               <input type="file" name="image" (change)="fileProgress($event)" />
             </div>
@@ -110,6 +114,7 @@
         <div class="row">
           <div class="col-md-10 offset-md-10">
             <form #form="ngForm" (ngSubmit)="putText(form)" method="post">
+              <h3>Añadir Dialogo</h3>
               <ion-item>
                 <ion-label position="floating">Nombre</ion-label>
                 <ion-input ngModel type="name" name="name" placeholder="Texto"></ion-input>
@@ -124,6 +129,8 @@
             </form>
 
             <form #form2="ngForm" (ngSubmit)="putImage(form2)" method="post">
+              <h3>Añadir Personaje</h3>
+
               <ion-item>
                 <ion-label position="floating">URL</ion-label>
                 <ion-input ngModel type="name" name="name" placeholder="url"></ion-input>
@@ -132,7 +139,7 @@
                 <ion-label position="floating">Tiempo entrada</ion-label>
                 <ion-input ngModel type="name" name="tiempoentrada" placeholder="Tiempo"></ion-input>
               </ion-item>
-           
+
               <ion-item>
                 <ion-label position="floating">Nombre personaje</ion-label>
                 <ion-input ngModel type="name" name="id" placeholder="nombre"></ion-input>
@@ -154,7 +161,7 @@
           </button>
           <div (click)="cargarMario()">
             <img
-              src="https://lh3.googleusercontent.com/proxy/dGyhQOktIvNaloENhf6oFvU3GteegJaCmyXGn1i3RacehXjsnF0KPhA39XP1hAy4UzSePELqw-8SEB9QmNZy6cXTF8E7zMwPk8oU8pLN5Id0wx03MYU">
+              src="https://lh3.googleusercontent.com/proxy/7sDbmzUkaIvidSgcL7STWmWBA7Gz0yfC8fAAru7oW4aG-gMIEqmRnDZgUVVsTkOF67lhjvXxQ_7T6U2H6QN0B6Unn3L_eqb8tk5EtYfDJkes768JI_U">
           </div>
           <button ion-button color="primary" (click)="vertexto()">
             Luigi
@@ -164,8 +171,10 @@
             guardarcanvas
           </button>
 
-          <button ion-button color="primary" (click)='startTimer()'>Start Timer</button>
-          <button ion-button color="primary" (click)='pauseTimer()'>Pause</button>
+          <button ion-button color="primary" (click)="startTimer()">
+            Mario movimiento
+          </button>
+
 
         </ion-col>
       </ion-row>
