@@ -5,16 +5,15 @@ import { AfterViewInit } from '@angular/core';
 import { renderTemplate } from '@angular/core/src/render3/instructions';
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
-import * as html2canvas from 'html2canvas'
 import { Storage } from '@ionic/storage';
 import { Escena } from '../../app/models/escena';
 import { Personaje } from '../../app/models/personaje';
 import { Texto } from '../../app/models/textos';
 
-import {EscenaFrames} from '../../app/models/escenaFrames';
-import {PersonajeFrame} from '../../app/models/personajeFrame';
-import {TextoFrame} from '../../app/models/textoFrame';
-import {Frame} from '../../app/models/frame';
+import { EscenaFrames } from '../../app/models/escenaFrames';
+import { PersonajeFrame } from '../../app/models/personajeFrame';
+import { TextoFrame } from '../../app/models/textoFrame';
+import { Frame } from '../../app/models/frame';
 
 
 
@@ -56,15 +55,18 @@ export class HomePage {
    listaPersonajeEscenaActual: Personaje[] = [];
    listaTexto: Texto[] = [];
 
-   listaFrames: Frame[]= [];
+   listaFrames: Frame[] = [];
    listaPersonajesFrameAnterior: Personaje[] = [];
 
 
    tiempoSalida: any;
-   tiempoEntrada: any; 
+   tiempoEntrada: any;
    idPersonaje: any;
    escena: Escena;
    dialogoActual: any;
+
+   escenaFrames: EscenaFrames;
+   frameActual: Frame;
 
 
    constructor(public navCtrl: NavController, public storage: Storage) {
@@ -74,16 +76,19 @@ export class HomePage {
 
 
       this.escena = new Escena();
+      this.escenaFrames = new EscenaFrames();
 
       //Escena para dibujar:
 
    }
 
-   borrarPersonajeEscena(personaje: Personaje, form: NgForm){
+   borrarPersonajeEscena(personaje: Personaje, form: NgForm) {
 
-      this.listaPersonaje.forEach(obj => {if(obj.id == personaje.id){
-         obj.tiempoSalida = form.value.tiempo;
-      }});
+      this.listaPersonaje.forEach(obj => {
+         if (obj.id == personaje.id) {
+            obj.tiempoSalida = form.value.tiempo;
+         }
+      });
       this.escena.personajes = this.listaPersonaje;
 
       this.listaPersonajeEscenaActual = this.listaPersonajeEscenaActual.filter(obj => obj.id !== personaje.id);
@@ -105,20 +110,64 @@ export class HomePage {
       }
    }
 
-   cargarMario() {
-      const img = new Image();
-      img.src = '../../assets/imgs/mario.png';
-      img.onload = () => {
-         this._CONTEXT = this._CANVAS.getContext('2d');
-
-         this._CONTEXT.drawImage(   // Image
-            img,
-            0,
-            0
-         );
-         this._CONTEXT.stroke();
-      };
+   elejirNumeroFrames5() {
+      this.escenaFrames.duracionFrame = 2;
+      this.escenaFrames.maximoFrames = 5;
+      this.nuevoPrimerFrame();
    }
+
+   elejirNumeroFrames10() {
+      this.escenaFrames.duracionFrame = 1;
+      this.escenaFrames.maximoFrames = 10;
+      this.nuevoPrimerFrame();
+   }
+
+
+   nuevoPrimerFrame() {
+
+      this.frameActual = new Frame();
+
+
+         this.frameActual.portadaFrame = '../../assets/imgs/noFotoPortada.png';      
+         this.frameActual.numero = 1;
+         this.listaFrames.push(this.frameActual);
+         this.escenaFrames.frames = this.listaFrames;
+         this.escenaFrames.numeroFrames = 1;
+         this.refreshFondo();
+
+     
+
+   }
+
+   cargarFrame(numero){
+      this.frameActual = this.listaFrames[numero];
+      this.drawimages(this.frameActual.personajes);
+   }
+
+   nuevoFrame() {
+
+      this.frameActual.portadaFrame = this.guardarcanvas();
+      this.listaFrames[this.frameActual.numero - 1] = this.frameActual;
+      var numeroFrames = this.escenaFrames.numeroFrames + 1;
+      if (this.escenaFrames.maximoFrames >= numeroFrames) {
+         this.escenaFrames.numeroFrames = this.escenaFrames.numeroFrames +1;
+         this.listaPersonajesFrameAnterior = this.frameActual.personajes;
+
+         this.frameActual = new Frame();
+         this.frameActual.portadaFrame = '../../assets/imgs/noFotoPortada.png';
+         this.frameActual.numero = numeroFrames;
+         this.listaFrames.push(this.frameActual);
+         this.escenaFrames.frames = this.listaFrames;
+
+         this.drawimages(this.listaPersonajesFrameAnterior);
+
+      }
+      else {
+         console.log("Maximo de frames alcanzado");
+      }
+
+   }
+
 
    fireEvent(e) {
       console.log(e.type);
@@ -152,6 +201,8 @@ export class HomePage {
          this.listaPersonaje.push(personaje);
          this.listaPersonajeEscenaActual.push(personaje);
          this.escena.personajes = this.listaPersonaje;
+
+         this.frameActual.personajes = this.listaPersonaje;
       }
       else {
          console.log("No se ha cargado la imagen aun eh");
@@ -173,7 +224,7 @@ export class HomePage {
       }
    }
 
-   continuarEscena(){
+   continuarEscena() {
 
       this.drawimages(this.listaPersonajeEscenaActual);
 
@@ -184,7 +235,7 @@ export class HomePage {
       var dialogo = new Texto();
       dialogo.texto = texto.value.name;
       dialogo.tiempo = texto.value.tiempo;
-      
+
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
@@ -193,7 +244,7 @@ export class HomePage {
       this._CONTEXT.font = '48px serif';
       this._CONTEXT.strokeText(texto.value.name, 50, 750);
       this.dialogoActual = "";
- 
+
    }
 
    dibujarDilogo() {
@@ -254,6 +305,33 @@ export class HomePage {
             this.imagenCargadaWidth = response.width;
          }
       )
+   }
+
+   cargaimagenFake(): void {
+
+      this.pintar = true;
+      this.idPersonaje = "Brujita"
+      var imagen = new Image();
+      imagen.src = '../../assets/imgs/haberlas.png'; 
+      // imagen.crossOrigin = "Anonymous";
+
+      this.imagen = imagen;
+
+      // this.getImageDimension(this.imagen).subscribe(
+      //    response => {
+      //       console.log(response);
+      //    });
+      const image = {
+         url: this.imagen.src,
+         context: 'client context'
+      }
+      this.getImageDimension(image).subscribe(
+         response => {
+            console.log(response);
+            this.imagenCargadaHeight = response.height;
+            this.imagenCargadaWidth = response.width;
+         }
+      );
    }
 
    cargaimagen(): void {
@@ -371,20 +449,17 @@ export class HomePage {
 
 
    guardarcanvas() {
-
-
       var micanvas = document.getElementById("micanvas") as HTMLCanvasElement;
       var dataURL = micanvas.toDataURL();
-      console.log(dataURL);
-
+      return dataURL;
    }
 
    drawImageFondoMario() {
       var img3 = new Image();
-       img3.src = '../../assets/imgs/fondo.png';
-            // img3.src = '../../assets/imgs/fondo1.jpg';
+      img3.src = '../../assets/imgs/fondo.png';
+      // img3.src = '../../assets/imgs/fondo1.jpg';
 
-      
+
       this._CONTEXT = this._CANVAS.getContext('2d');
       var pat = this._CONTEXT.createPattern(img3, "repeat");
       this._CONTEXT.fillStyle = pat;
@@ -402,9 +477,7 @@ export class HomePage {
       var pat = this._CONTEXT.createPattern(img3, "repeat");
       this._CONTEXT.fillStyle = pat;
       this._CONTEXT.fillRect(0, 0, 1900, 1900);
-
       this.escena.fondo = img3.src;
-
    }
 
    timeLeft: number = 60;
@@ -443,8 +516,7 @@ export class HomePage {
 
             copiaEscena.textos.forEach(dialogo => {
 
-               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false)
-               {
+               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false) {
                   dialogo.escrito = true;
                   this.dialogoActual = dialogo.texto
 
@@ -460,7 +532,7 @@ export class HomePage {
       }, 1)
    }
 
-   cargaDemo(){
+   cargaDemo() {
 
       var brujita = new Personaje();
       brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
@@ -471,11 +543,11 @@ export class HomePage {
       brujita.tiempoSalida = 300;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-    
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -489,11 +561,11 @@ export class HomePage {
       brujita.tiempoSalida = 400;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -506,11 +578,11 @@ export class HomePage {
       brujita.tiempoSalida = 590;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -523,11 +595,11 @@ export class HomePage {
       brujita.tiempoSalida = 790;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -540,11 +612,11 @@ export class HomePage {
       brujita.tiempoSalida = 1010;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -557,11 +629,11 @@ export class HomePage {
       brujita.tiempoSalida = 1200;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -574,11 +646,11 @@ export class HomePage {
       brujita.tiempoSalida = 1400;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -594,11 +666,11 @@ export class HomePage {
       brujita.tiempoSalida = 1620;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -612,16 +684,16 @@ export class HomePage {
       brujita.tiempoSalida = 1800;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
 
-      
+
       brujita = new Personaje();
       brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
       brujita.id = brujita;
@@ -631,11 +703,11 @@ export class HomePage {
       brujita.tiempoSalida = 2000000000000000000000;
       brujita.ancho = 122;
       brujita.alto = 112;
-      brujita.positionEnImagenX =22; 
-      brujita.positionEnImagenY =155;
+      brujita.positionEnImagenX = 22;
+      brujita.positionEnImagenY = 155;
 
-   
-      
+
+
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
@@ -645,7 +717,7 @@ export class HomePage {
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
-       dialogo = new Texto();
+      dialogo = new Texto();
       dialogo.texto = "Brujita: Ahg, como odio las cuevas, me duelen los pies de andar";
       dialogo.tiempo = 700;
       this.listaTexto.push(dialogo);
@@ -654,7 +726,7 @@ export class HomePage {
       var dialogo = new Texto();
       dialogo.texto = "Brujita: Y encima estas dos van extremadamente lentas";
       dialogo.tiempo = 1400;
-     this.listaTexto.push(dialogo);
+      this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
       var dialogo = new Texto();
@@ -691,11 +763,11 @@ export class HomePage {
       samurai.tiempoSalida = 3400;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
-      
+
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -708,11 +780,11 @@ export class HomePage {
       samurai.tiempoSalida = 3650;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
-      
+
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -725,11 +797,11 @@ export class HomePage {
       samurai.tiempoSalida = 3850;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
-      
+
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -742,11 +814,11 @@ export class HomePage {
       samurai.tiempoSalida = 4060;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
-      
+
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -759,11 +831,11 @@ export class HomePage {
       reina.tiempoSalida = 4070;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
 
-   
-      
+
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -776,10 +848,10 @@ export class HomePage {
       samurai.tiempoSalida = 4300;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -792,10 +864,10 @@ export class HomePage {
       reina.tiempoSalida = 4310;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
 
-      
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -808,10 +880,10 @@ export class HomePage {
       samurai.tiempoSalida = 4570;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-      
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -825,11 +897,11 @@ export class HomePage {
       reina.tiempoSalida = 4525;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
 
-   
-      
+
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -842,8 +914,8 @@ export class HomePage {
       samurai.tiempoSalida = 4800;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
@@ -857,11 +929,11 @@ export class HomePage {
       reina.tiempoSalida = 4780;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
 
-   
-      
+
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -874,11 +946,11 @@ export class HomePage {
       samurai.tiempoSalida = 22222222222;
       samurai.ancho = 97;
       samurai.alto = 106;
-      samurai.positionEnImagenX =374; 
-      samurai.positionEnImagenY =158;
+      samurai.positionEnImagenX = 374;
+      samurai.positionEnImagenY = 158;
 
-   
-      
+
+
       this.listaPersonaje.push(samurai);
       this.escena.personajes = this.listaPersonaje;
 
@@ -891,9 +963,9 @@ export class HomePage {
       reina.tiempoSalida = 5020;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
-         
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -906,9 +978,9 @@ export class HomePage {
       reina.tiempoSalida = 5200;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
-         
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
@@ -921,34 +993,34 @@ export class HomePage {
       reina.tiempoSalida = 22222222222222222222;
       reina.ancho = 101;
       reina.alto = 139;
-      reina.positionEnImagenX =147; 
-      reina.positionEnImagenY =127;
-         
+      reina.positionEnImagenX = 147;
+      reina.positionEnImagenY = 127;
+
       this.listaPersonaje.push(reina);
       this.escena.personajes = this.listaPersonaje;
 
-      
+
       var dialogo = new Texto();
       dialogo.texto = "Samurai: No sé porque siempre tienes que ir corriendo de un sitio a otro";
       dialogo.tiempo = 5250;
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
-      
+
       var dialogo = new Texto();
       dialogo.texto = "Brujita: El problema es que tú vas muy despacio";
       dialogo.tiempo = 5650;
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
-      
+
       var dialogo = new Texto();
       dialogo.texto = "Samurai: Pues mira que cuando entrenamos, siempre dices que vaya más despacio...";
       dialogo.tiempo = 6050;
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
-      
+
       var dialogo = new Texto();
       dialogo.texto = "Brujita: ¡ESO ES MENTIRA!";
       dialogo.tiempo = 6500;
@@ -967,7 +1039,7 @@ export class HomePage {
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
 
-      
+
       var dialogo = new Texto();
       dialogo.texto = "BRRRRRRRRRRRRRRUUUUUUUUUUUUUUMM ";
       dialogo.tiempo = 8000;
@@ -990,19 +1062,19 @@ export class HomePage {
       monstruo.tiempoSalida = 22222222222222222222;
       monstruo.ancho = 72;
       monstruo.alto = 74;
-      monstruo.positionEnImagenX =131; 
-      monstruo.positionEnImagenY =9;
- 
+      monstruo.positionEnImagenX = 131;
+      monstruo.positionEnImagenY = 9;
+
       this.listaPersonaje.push(monstruo);
       this.escena.personajes = this.listaPersonaje;
-   
+
 
       var dialogo = new Texto();
       dialogo.texto = "Monstruo: ¡BRUUUUUUAAAAAAAAAAAAAAAH!";
       dialogo.tiempo = 9010;
       this.listaTexto.push(dialogo);
       this.escena.textos = this.listaTexto;
-      
+
       var dialogo = new Texto();
       dialogo.texto = "Samurai: ¿De donde ha salido? No lo he visto ni llegar";
       dialogo.tiempo = 9500;
@@ -1056,8 +1128,7 @@ export class HomePage {
 
             copiaEscena.textos.forEach(dialogo => {
 
-               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false)
-               {
+               if (dialogo.tiempo <= this.timeNow && dialogo.escrito == false) {
                   dialogo.escrito = true;
                   this.dialogoActual = dialogo.texto
 
@@ -1104,10 +1175,12 @@ export class HomePage {
       this.lineaTexto();
       this.dibujarDilogo();
       escena.forEach(element => {
-         var zoomAncho = element.ancho*2;
-         var zoomAlto = element.alto*2;
-         if(element.id == "monstruo"){var zoomAncho = element.ancho*6.5;
-            var zoomAlto = element.alto*6.5;}
+         var zoomAncho = element.ancho * 2;
+         var zoomAlto = element.alto * 2;
+         if (element.id == "monstruo") {
+            var zoomAncho = element.ancho * 6.5;
+            var zoomAlto = element.alto * 6.5;
+         }
 
          const img = new Image();
          img.src = element.foto;
@@ -1132,47 +1205,6 @@ export class HomePage {
    }
 
    //Esto es un ejemplo de como pillar un mini mario en una imagen con muchos marios y medio animarlo
-   startTimer() {
-      var n = 0;
-      var frame = this.ARQUERO_WIDTH * n;
-
-      this.interval = setInterval(() => {
-         if (this.timeLeft > 0) {
-            this.timeLeft--;
-            this.clearCanvas();
-            const img = new Image();
-            img.src = '../../assets/imgs/363156_cutesbboy_beacon-cave-background.png';
-            img.onload = () => {
-               this._CONTEXT = this._CANVAS.getContext('2d');
-
-               this._CONTEXT.drawImage(   // Image
-                  img,
-                  // ---- Selection ----
-                  230 + frame, // sx
-                  7, // sy
-                  this.ARQUERO_WIDTH, // sWidth
-                  this.ARQUERO_HEIGHT, // sHeight
-                  0, // dx
-                  0, // dy
-                  this.ARQUERO_WIDTH * 5,
-                  this.ARQUERO_HEIGHT * 5
-               );
-               this._CONTEXT.stroke();
-               if (n == 3) {
-                  n = 0;
-                  frame = 0;
-
-               }
-               else {
-                  frame = this.ARQUERO_WIDTH * n;
-                  n= n+1;
-               }
-            };
-         } else {
-            this.timeLeft = 60;
-         }
-      }, 500)
-   }
 
    //Pausar el timer (servirá para hacer un botón de pausa igual)
    pauseTimer() {

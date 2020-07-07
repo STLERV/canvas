@@ -1,17 +1,22 @@
 export class Frame{
          
     personajes: any;
-    textos: any
+    textos: any;
+    portadaFrame: any;
+    numero: any;
    
     constructor(
-        fondo = '',
+        portadaFrame = '',
         personajes = [],
-        textos = []
+        textos = [],
+        numero = ''
 
     ) {
 
      this.personajes = personajes,
-     this.textos = textos
+     this.textos = textos,
+     this.portadaFrame = portadaFrame,
+     this.numero = numero
 
     }
 }
