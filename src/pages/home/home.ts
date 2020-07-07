@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
@@ -24,6 +24,7 @@ export class HomePage {
    private _CANVAS: any;
    public _CONTEXT: any;
 
+  
    public context: CanvasRenderingContext2D;
 
    ISize: { width: number; height: number; }
@@ -73,7 +74,9 @@ https://lh3.googleusercontent.com/proxy/kVEGssAma8IYD09wZCx4H_a9-tuQlXWytuZD0121
 https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mKeMvSmP2pG01xRFJ7S3vzAZoZH48MNWkWLdfZ1dSFBeC7aLLCHvVGke869xC4E396aFavhPjSCgE
 */
 
-   constructor(public navCtrl: NavController, public storage: Storage) {
+public PtagClicked: boolean = false;
+   
+constructor(public navCtrl: NavController, public storage: Storage, private render: Renderer2) {
 
    }
    ngOnInit() {
@@ -1194,4 +1197,13 @@ https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mK
    pauseTimer() {
       clearInterval(this.interval);
    }
+   muestrame = false;
+   muestra() {
+      this.muestrame = true;
+    }
+      oculta(){
+
+         this.muestrame = false;
+      }
+
 }

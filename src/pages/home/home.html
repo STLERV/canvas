@@ -8,58 +8,58 @@
 
 
 <ion-content padding>
-<div class = "row">
-  <ion-row>
-    <ion-col>
-      <div class="ion-canvas">
-        <canvas #canvas id="micanvas" (click)="fireEvent($event)"></canvas>
+  <div class="row">
+    <ion-row>
+      <ion-col>
+        <div class="ion-canvas">
+          <canvas #canvas id="micanvas" (click)="fireEvent($event)"></canvas>
 
-      </div>
-    
-      <button ion-button color="primary" (click)="drawTriangle()">
-        dibuja un triangulo
-      </button>
-      <button ion-button color="primary" (click)="lineaTexto()">
-        Separador
-      </button>
- 
-      <button ion-button color="primary" (click)="cargaimagen()">
-        cargaimagen
-      </button>
-      <button ion-button color="primary" (click)="vertexto()">
-        ver texto
-      </button>
-   
+        </div>
 
-      <button ion-button color="primary" (click)="guardarcanvas()">
-        guardarcanvas
-      </button>
+        <button ion-button color="primary" (click)="drawTriangle()">
+          dibuja un triangulo
+        </button>
+        <button ion-button color="primary" (click)="lineaTexto()">
+          Separador
+        </button>
 
-      <button ion-button color="primary" (click)="clearCanvas()">
-        Reset
-      </button>
-
-      <button ion-button color="primary" (click)="reconstruirEscena()">
-        Cargar Escena
-      </button>
-
-      <button ion-button color="primary" (click)="continuarEscena()">
-        Continuar escena
-      </button>
-
-      <button ion-button color="primary" (click)="reconstruirEscenaOnePicture()">
-        Escena demo
-      </button>
-    </ion-col>
-  </ion-row>
+        <button ion-button color="primary" (click)="cargaimagen()">
+          cargaimagen
+        </button>
+        <button ion-button color="primary" (click)="vertexto()">
+          ver texto
+        </button>
 
 
-<!-- ////////////////////////// fin de la primera columnaaaaaa/////////////////////////////////////////////////// -->
-  
+        <button ion-button color="primary" (click)="guardarcanvas()">
+          guardarcanvas
+        </button>
 
-<ion-row>
-    <ion-col size-md="2" offset-md="6">
-     
+        <button ion-button color="primary" (click)="clearCanvas()">
+          Reset
+        </button>
+
+        <button ion-button color="primary" (click)="reconstruirEscena()">
+          Cargar Escena
+        </button>
+
+        <button ion-button color="primary" (click)="continuarEscena()">
+          Continuar escena
+        </button>
+
+        <button ion-button color="primary" (click)="reconstruirEscenaOnePicture()">
+          Escena demo
+        </button>
+      </ion-col>
+    </ion-row>
+
+
+    <!-- ////////////////////////// fin de la primera columnaaaaaa/////////////////////////////////////////////////// -->
+
+
+    <ion-row>
+      <ion-col size-md="2" offset-md="6">
+
         <h3>Personajes en escena</h3>
         <div *ngFor="let personaje of listaPersonajeEscenaActual">
           <ion-col align-self-center text-center>
@@ -80,98 +80,122 @@
 
           </ion-col>
         </div>
-    
 
 
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 offset-md-3">
-            <h3>Subir foto desde ordenador</h3>
-            <div class="form-group">
-              <input type="file" name="image" (change)="fileProgress($event)" />
-            </div>
-            <div *ngIf="fileUploadProgress">
-              Upload progress: {{ fileUploadProgress }}
-            </div>
-            <div class="image-preview mb-3" *ngIf="previewUrl">
-              <img [src]="previewUrl" height="300" />
-            </div>
 
-            <div class="mb-3" *ngIf="uploadedFilePath">
-              {{uploadedFilePath}}
-            </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <h3>Subir foto desde ordenador</h3>
+              <div class="form-group">
+                <input type="file" name="image" (change)="fileProgress($event)" />
+              </div>
+              <div *ngIf="fileUploadProgress">
+                Upload progress: {{ fileUploadProgress }}
+              </div>
+              <div class="image-preview mb-3" *ngIf="previewUrl">
+                <img [src]="previewUrl" height="300" />
+              </div>
 
-            <div class="form-group">
-              <button class="btn btn-primary" (click)="onSubmit()">Guardar foto</button>
+              <div class="mb-3" *ngIf="uploadedFilePath">
+                {{uploadedFilePath}}
+              </div>
 
+              <div class="form-group">
+                <button class="btn btn-primary" (click)="onSubmit()">Guardar foto</button>
+
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <form #form="ngForm" (ngSubmit)="putText(form)" method="post">
-        <h3>Añadir Dialogo</h3>
+        <form #form="ngForm" (ngSubmit)="putText(form)" method="post">
+          <h3>Añadir Dialogo</h3>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input ngModel type="name" name="name" placeholder="Texto"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Tiempo</ion-label>
+            <ion-input ngModel type="name" name="tiempo" placeholder="Tiempo"></ion-input>
+          </ion-item>
+
+          <button type="submit" expand="full">Cargar texto</button>
+
+        </form>
+
+        <form #form2="ngForm" (ngSubmit)="putImage(form2)" method="post">
+          <h3>Añadir Personaje</h3>
+
+          <ion-item>
+            <ion-label position="floating">URL</ion-label>
+            <ion-input ngModel type="name" name="name" placeholder="url"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Tiempo entrada</ion-label>
+            <ion-input ngModel type="name" name="tiempoentrada" placeholder="Tiempo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nombre personaje</ion-label>
+            <ion-input ngModel type="name" name="id" placeholder="nombre"></ion-input>
+          </ion-item>
+
+          <button type="submit" expand="full">Cargar imagen</button>
+
+        </form>
+
+        <button ion-button color="primary" (click)="drawImageFondoMario()">
+          Cargar fondo
+        </button>
+        <div (click)="cargarMario()">
+          <img
+            src="https://lh3.googleusercontent.com/proxy/7sDbmzUkaIvidSgcL7STWmWBA7Gz0yfC8fAAru7oW4aG-gMIEqmRnDZgUVVsTkOF67lhjvXxQ_7T6U2H6QN0B6Unn3L_eqb8tk5EtYfDJkes768JI_U">
+        </div>
+        <button ion-button color="primary" (click)="vertexto()">
+          Luigi
+        </button>
+
+        <button ion-button color="primary" (click)="guardarcanvas()">
+          guardarcanvas
+        </button>
+
+        <button ion-button color="primary" (click)="startTimer()">
+          Mario movimiento
+        </button>
+
+
         <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input ngModel type="name" name="name" placeholder="Texto"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Tiempo</ion-label>
-          <ion-input ngModel type="name" name="tiempo" placeholder="Tiempo"></ion-input>
-        </ion-item>
 
-        <button type="submit" expand="full">Cargar texto</button>
+          <button ion-button (click)="muestra()">VER FONDOS</button>
+          
+          <button ion-button (click)="oculta()">Ocultar fondos</button>
+          <div *ngIf="muestrame"> Tria un fondo
+              <h2>hihi</h2>
 
-      </form>
+             
+                <img src="https://i.etsystatic.com/17742991/r/il/2f2cee/1913591851/il_570xN.1913591851_gydx.jpg">
+       
 
-      <form #form2="ngForm" (ngSubmit)="putImage(form2)" method="post">
-        <h3>Añadir Personaje</h3>
 
-        <ion-item>
-          <ion-label position="floating">URL</ion-label>
-          <ion-input ngModel type="name" name="name" placeholder="url"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Tiempo entrada</ion-label>
-          <ion-input ngModel type="name" name="tiempoentrada" placeholder="Tiempo"></ion-input>
+          </div>
+
+
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Nombre personaje</ion-label>
-          <ion-input ngModel type="name" name="id" placeholder="nombre"></ion-input>
-        </ion-item>
+            
+        
 
-        <button type="submit" expand="full">Cargar imagen</button>
-
-      </form>
-
-      <button ion-button color="primary" (click)="drawImageFondoMario()">
-        Cargar fondo
-      </button>
-      <div (click)="cargarMario()">
-        <img
-          src="https://lh3.googleusercontent.com/proxy/7sDbmzUkaIvidSgcL7STWmWBA7Gz0yfC8fAAru7oW4aG-gMIEqmRnDZgUVVsTkOF67lhjvXxQ_7T6U2H6QN0B6Unn3L_eqb8tk5EtYfDJkes768JI_U">
-      </div>
-      <button ion-button color="primary" (click)="vertexto()">
-        Luigi
-      </button>
-
-      <button ion-button color="primary" (click)="guardarcanvas()">
-        guardarcanvas
-      </button>
-
-      <button ion-button color="primary" (click)="startTimer()">
-        Mario movimiento
-      </button>
+      </ion-col>
+    </ion-row>
 
 
-    </ion-col>
-  </ion-row>
 
 
-  
 
 
-</div>
+
+
+
+  </div>
 </ion-content>
-
