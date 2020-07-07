@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
@@ -20,6 +20,7 @@ import { Frame } from '../../app/models/frame';
 import { NodeData } from '@angular/core/src/view';
 import { transition } from '@angular/core/src/animation/dsl';
 import { ThrowStmt } from '@angular/compiler';
+import { Imagen } from '../../app/models/imagen';
 
 @Component({
    selector: 'page-home',
@@ -32,6 +33,7 @@ export class HomePage {
    private _CANVAS: any;
    public _CONTEXT: any;
 
+  
    public context: CanvasRenderingContext2D;
 
    ISize: { width: number; height: number; }
@@ -64,12 +66,15 @@ export class HomePage {
    idPersonaje: any;
    escena: Escena;
    dialogoActual: any;
+   listaFondos: Imagen [] = [];
 
    escenaFrames: EscenaFrames;
    frameActual: Frame;
 
 
-   constructor(public navCtrl: NavController, public storage: Storage) {
+public PtagClicked: boolean = false;
+   
+constructor(public navCtrl: NavController, public storage: Storage, private render: Renderer2) {
 
    }
    ngOnInit() {
@@ -80,6 +85,34 @@ export class HomePage {
 
       //Escena para dibujar:
 
+      var imagen = new Imagen();
+      imagen.id = 0;
+      imagen.src = '/assets/imgs/1.png';
+      var imagen2 = new Imagen();
+      imagen2.id = 1;
+      imagen2.src = '/assets/imgs/2.png';
+      var imagen3 = new Imagen();
+      imagen3.id = 2;
+      imagen3.src = '/assets/imgs/3.png';
+      var imagen4 = new Imagen();
+      imagen4.id = 3;
+      imagen4.src = '/assets/imgs/4.png';
+ 
+ 
+
+      //Escena para dibujar:
+
+      this.listaFondos.push(imagen);
+      this.listaFondos.push(imagen2);
+      this.listaFondos.push(imagen3);
+      this.listaFondos.push(imagen4);
+     
+      
+      
+      
+    
+      
+     
    }
 
    borrarPersonajeEscena(personaje: Personaje, form: NgForm) {
@@ -1210,4 +1243,13 @@ export class HomePage {
    pauseTimer() {
       clearInterval(this.interval);
    }
+   muestrame = false;
+   muestra() {
+      this.muestrame = true;
+    }
+      oculta(){
+
+         this.muestrame = false;
+      }
+
 }
