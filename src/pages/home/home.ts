@@ -132,8 +132,8 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
 
    ionViewDidLoad() {
       this._CANVAS = this.canvasEl.nativeElement;
-      this._CANVAS.width = 1100;
-      this._CANVAS.height = 800;
+      this._CANVAS.width = 900;
+      this._CANVAS.height = 900;
 
       this.initialiseCanvas();
 
@@ -585,25 +585,43 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
 
 
 
-      cargarfondo() {
-         var img3 = new Image();
+      // cargarfondo() {
+      //    var img3 = new Image();
 
-         img3.src = this.srcq;
-         // img3.src = '../../assets/imgs/fondo1.jpg';
+      //    img3.src = this.srcq;
+      //    // img3.src = '../../assets/imgs/fondo1.jpg';
+      //    img3.width = 900;
+      //    img3.height = 900; 
+       
+      //    this.clearCanvas();
+      //    this._CONTEXT = this._CANVAS.getContext('2d');
+      
+      //     var pat = this._CONTEXT.createPattern(img3, "repeat");
+      //     this._CONTEXT.fillStyle = pat;
+      //     this._CONTEXT.fillRect(0, 0, 900, 900);
    
-         this.clearCanvas();
-         this._CONTEXT = this._CANVAS.getContext('2d');
-         var pat = this._CONTEXT.createPattern(img3, "repeat");
-         this._CONTEXT.fillStyle = pat;
-         this._CONTEXT.fillRect(0, 0, 1900, 1900);
+      //    this.escena.fondo = img3.src;
    
-         this.escena.fondo = img3.src;
-   
-      }
+      // }
  
       Seleccionarfondo(src){
          
       this.srcq = src;
+      var img3 = new Image();
+
+      img3.src = this.srcq;
+      // img3.src = '../../assets/imgs/fondo1.jpg';
+      img3.width = 900;
+      img3.height = 900; 
+    
+      this.clearCanvas();
+      this._CONTEXT = this._CANVAS.getContext('2d');
+   
+       var pat = this._CONTEXT.createPattern(img3, "repeat");
+       this._CONTEXT.fillStyle = pat;
+       this._CONTEXT.fillRect(0, 0, 900, 900);
+
+      this.escena.fondo = img3.src;
 
          
       }
