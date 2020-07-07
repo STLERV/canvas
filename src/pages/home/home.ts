@@ -12,6 +12,7 @@ import { Texto } from '../../app/models/textos'
 import { NodeData } from '@angular/core/src/view';
 import { transition } from '@angular/core/src/animation/dsl';
 import { ThrowStmt } from '@angular/compiler';
+import { Imagen } from '../../app/models/imagen';
 
 @Component({
    selector: 'page-home',
@@ -62,7 +63,7 @@ export class HomePage {
    idPersonaje: any;
    escena: Escena;
    dialogoActual: any;
-   listaFondos: string [] = [];
+   listaFondos: Imagen [] = [];
 
 
 /*https://2img.net/h/i1211.photobucket.com/albums/cc438/Heavy128/SuperMario3DLand/Tanooki_Bowser_False.png
@@ -84,14 +85,28 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
 
 
       this.escena = new Escena();
+      var imagen = new Imagen();
+      imagen.id = 0;
+      imagen.src = '/assets/imgs/1.png';
+      var imagen2 = new Imagen();
+      imagen2.id = 1;
+      imagen2.src = '/assets/imgs/2.png';
+      var imagen3 = new Imagen();
+      imagen3.id = 2;
+      imagen3.src = '/assets/imgs/3.png';
+      var imagen4 = new Imagen();
+      imagen4.id = 3;
+      imagen4.src = '/assets/imgs/4.png';
+ 
+ 
 
       //Escena para dibujar:
 
-      this.listaFondos.push('/assets/imgs/1.png');
-      this.listaFondos.push('/assets/imgs/2.png');
-      this.listaFondos.push('/assets/imgs/logo.png');
-      this.listaFondos.push('/assets/imgs/logo2.png');
-      this.listaFondos.push('/assets/imgs/mario.png');
+      this.listaFondos.push(imagen);
+      this.listaFondos.push(imagen2);
+      this.listaFondos.push(imagen3);
+      this.listaFondos.push(imagen4);
+     
       
       
       
