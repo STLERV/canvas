@@ -3,12 +3,14 @@ export class Escena{
          
     fondo: any;
     personajes: any;
-    textos: any
+    textos: any;
+  
    
     constructor(
         fondo = '',
         personajes = [],
         textos = []
+        
 
     ) {
 

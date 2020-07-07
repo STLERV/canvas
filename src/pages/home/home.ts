@@ -5,15 +5,10 @@ import { AfterViewInit } from '@angular/core';
 import { renderTemplate } from '@angular/core/src/render3/instructions';
 import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
-import * as html2canvas from 'html2canvas'
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage'; 
 import { Escena } from '../../app/models/escena';
-import { Personaje } from '../../app/models/personaje'
+import { Personaje } from '../../app/models/personaje';
 import { Texto } from '../../app/models/textos'
-
-
-
-
 import { NodeData } from '@angular/core/src/view';
 import { transition } from '@angular/core/src/animation/dsl';
 import { ThrowStmt } from '@angular/compiler';
