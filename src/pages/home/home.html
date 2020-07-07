@@ -13,33 +13,17 @@
         <canvas #canvas id="micanvas" (click)="fireEvent($event)"></canvas>
 
       </div>
-      <button ion-button color="primary" (click)="drawTriangle()">
-        dibuja un triangulo
-      </button>
-      <button ion-button color="primary" (click)="lineaTexto()">
-        Separador
-      </button>
-      <button ion-button color="primary" (click)="cargaimagen()">
-        cargaimagen
-      </button>
-      <button ion-button color="primary" (click)="vertexto()">
-        ver texto
-      </button>
 
       <button ion-button color="primary" (click)="guardarcanvas()">
         guardarcanvas
-      </button>
-
-      <button ion-button color="primary" (click)="clearCanvas()">
-        Reset
       </button>
 
       <button ion-button color="primary" (click)="reconstruirEscena()">
         Cargar Escena
       </button>
 
-      <button ion-button color="primary" (click)="continuarEscena()">
-        Continuar escena
+      <button ion-button color="primary" (click)="siguienteFrame()">
+        Siguiente fram
       </button>
 
       <button ion-button color="primary" (click)="reconstruirEscenaOnePicture()">
@@ -74,33 +58,6 @@
           </ion-col>
         </div>
       </ion-col>
-
-
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 offset-md-3">
-            <h3>Subir foto desde ordenador</h3>
-            <div class="form-group">
-              <input type="file" name="image" (change)="fileProgress($event)" />
-            </div>
-            <div *ngIf="fileUploadProgress">
-              Upload progress: {{ fileUploadProgress }}
-            </div>
-            <div class="image-preview mb-3" *ngIf="previewUrl">
-              <img [src]="previewUrl" height="300" />
-            </div>
-
-            <div class="mb-3" *ngIf="uploadedFilePath">
-              {{uploadedFilePath}}
-            </div>
-
-            <div class="form-group">
-              <button class="btn btn-primary" (click)="onSubmit()">Guardar foto</button>
-
-            </div>
-          </div>
-        </div>
-      </div>
 
     </ion-col>
   </ion-row>

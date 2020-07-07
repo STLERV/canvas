@@ -8,9 +8,13 @@ import { NgForm } from '@angular/forms';
 import * as html2canvas from 'html2canvas'
 import { Storage } from '@ionic/storage';
 import { Escena } from '../../app/models/escena';
-import { Personaje } from '../../app/models/personaje'
-import { Texto } from '../../app/models/textos'
+import { Personaje } from '../../app/models/personaje';
+import { Texto } from '../../app/models/textos';
 
+import {EscenaFrames} from '../../app/models/escenaFrames';
+import {PersonajeFrame} from '../../app/models/personajeFrame';
+import {TextoFrame} from '../../app/models/textoFrame';
+import {Frame} from '../../app/models/frame';
 
 
 
@@ -48,18 +52,13 @@ export class HomePage {
    pintar: boolean = false;
 
 
-   MARIO_WIDTH: any = 32;
-   MARIO_HEIGHT: any = 39;
-
-   ARQUERO_WIDTH : any = 48;
-   ARQUERO_HEIGHT : any = 46;
-
-   FLECHA_WIDTH : any = 26;
-   FLECHA_HEIGHT : any = 24;
-
    listaPersonaje: Personaje[] = [];
    listaPersonajeEscenaActual: Personaje[] = [];
    listaTexto: Texto[] = [];
+
+   listaFrames: Frame[]= [];
+   listaPersonajesFrameAnterior: Personaje[] = [];
+
 
    tiempoSalida: any;
    tiempoEntrada: any; 
@@ -67,16 +66,6 @@ export class HomePage {
    escena: Escena;
    dialogoActual: any;
 
-
-/*https://2img.net/h/i1211.photobucket.com/albums/cc438/Heavy128/SuperMario3DLand/Tanooki_Bowser_False.png
-https://i.ya-webdesign.com/images/sol-vector-png-5.png
-https://www.nintenderos.com/wp-content/uploads/2012/09/ice_mario.png
-https://imagenpng.com/wp-content/uploads/2015/08/Curiosidades-de-mario-brospng.png
-https://1.bp.blogspot.com/-QuppqorADgs/TxnqL6UFPLI/AAAAAAAABIk/0orRP7EjIiU/s1600/22823512924459048355510.png
-https://lh3.googleusercontent.com/proxy/UNf8EF579QOaVeOmoM2XISDy60-dBM3W0TK-A55IdH4X8HWp6jTMuj2noMLUFEPc1HumGswu1PzD9fKvRVfkXM3Gpe5BBzZ0KtstGTT1TbKCo1TYTFY
-https://lh3.googleusercontent.com/proxy/kVEGssAma8IYD09wZCx4H_a9-tuQlXWytuZD0121pQobjkNZ6NDlVR1dTxQwCTdxnnVoCl67yMD9kWID8BiDdcOSusah0pdF71HUsS8n7fK8llp1JI4
-https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mKeMvSmP2pG01xRFJ7S3vzAZoZH48MNWkWLdfZ1dSFBeC7aLLCHvVGke869xC4E396aFavhPjSCgE
-*/
 
    constructor(public navCtrl: NavController, public storage: Storage) {
 
@@ -88,11 +77,6 @@ https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mK
 
       //Escena para dibujar:
 
-     
-      
-    
-      
-     
    }
 
    borrarPersonajeEscena(personaje: Personaje, form: NgForm){
@@ -490,16 +474,11 @@ https://lh3.googleusercontent.com/proxy/Ll80Bs11y_mcXi1wzPtdOYhVlnIw8KwiKL5XR6mK
       brujita.positionEnImagenX =22; 
       brujita.positionEnImagenY =155;
 
-   
+    
       
       this.listaPersonaje.push(brujita);
       this.escena.personajes = this.listaPersonaje;
 
-      
-
- 
-   
-     
 
       brujita = new Personaje();
       brujita.foto = '../../assets/imgs/6fcf009f7a53cbe55821145cd74596dc.png';
