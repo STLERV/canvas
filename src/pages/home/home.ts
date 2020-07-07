@@ -62,6 +62,7 @@ export class HomePage {
    idPersonaje: any;
    escena: Escena;
    dialogoActual: any;
+   listaFondos: string [] = [];
 
 
 /*https://2img.net/h/i1211.photobucket.com/albums/cc438/Heavy128/SuperMario3DLand/Tanooki_Bowser_False.png
@@ -86,7 +87,13 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
 
       //Escena para dibujar:
 
-     
+      this.listaFondos.push('/assets/imgs/1.png');
+      this.listaFondos.push('/assets/imgs/2.png');
+      this.listaFondos.push('/assets/imgs/logo.png');
+      this.listaFondos.push('/assets/imgs/logo2.png');
+      this.listaFondos.push('/assets/imgs/mario.png');
+      
+      
       
     
       

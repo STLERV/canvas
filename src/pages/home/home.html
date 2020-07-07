@@ -173,14 +173,18 @@
           <div *ngIf="muestrame"> Tria un fondo
               <h2>hihi</h2>
 
-             
-                <img src="https://i.etsystatic.com/17742991/r/il/2f2cee/1913591851/il_570xN.1913591851_gydx.jpg">
-       
-
-
+             <div class = row>
+            
+                <div *ngFor="let i of listaFondos">
+ 
+                <img src={{i}} width="300" height="300">
+            
+            </div>
           </div>
-
-
+                
+              </div> 
+        
+             
         </ion-item>
 
             
