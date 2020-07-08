@@ -35,15 +35,14 @@
             Nuevo frame
           </button>
         </ion-row>
-        
+
         <h3>Lista frames</h3>
         <div *ngFor="let frame of listaFrames">
           <ion-col align-self-center text-center>
-  
+
             <div (click)="cargarFrame(frame.numero)">
               <h5>Frame número {{frame.numero}}</h5>
-              <img
-                src={{frame.portadaFrame}} width="150" height="150">
+              <img src={{frame.portadaFrame}} width="150" height="150">
             </div>
 
           </ion-col>
@@ -152,26 +151,25 @@
         </button>
 
 
-        <ion-item>
+          <ion-item>
 
-          <button ion-button (click)="muestra()">VER FONDOS</button>
+            <button ion-button (click)="muestra()">VER FONDOS</button>
 
-          <button ion-button (click)="oculta()">Ocultar fondos</button>
-          <div *ngIf="muestrame"> Tria un fondo
-            <h2>hihi</h2>
+            <button ion-button (click)="oculta()">Ocultar fondos</button>
+            <div *ngIf="muestrame"> Tria un fondo
+              <h2>hihi</h2>
 
 
 
-            <ion-grid>
-              <ion-row no-padding>
-               <ion-col col-6 *ngFor="let fondo of listaFondos">
+              <ion-grid>
+                <ion-row no-padding>
+                  <ion-col col-6 *ngFor="let fondo of listaFondos">
 
-                <img src={{fondo.src}} width="500" height="500">
+                    <img src={{fondo.src}} width="500" height="500">
 
-               </ion-col>
-              </ion-row>
-            </ion-grid> 
-<!-- 
+                </ion-row>
+              </ion-grid>
+              <!-- 
             <ion-grid class="grid-categories">
               <ion-row *ngFor="let imagen of listaFondos " >
                 <ion-col *ngIf="{{imagen.id}} % 2 == 0" >
@@ -187,18 +185,19 @@
                 </ion-col>
               </ion-row>
             </ion-grid> -->
-          
-         
-
-          </div>
-
-
-        </ion-item>
 
 
 
+            </div>
 
-      </ion-col>
+
+          </ion-item>
+
+
+
+
+
+          </ion-col>
     </ion-row>
 
 

@@ -20,7 +20,7 @@ import { Frame } from '../../app/models/frame';
 import { NodeData } from '@angular/core/src/view';
 import { transition } from '@angular/core/src/animation/dsl';
 import { ThrowStmt } from '@angular/compiler';
-import { Imagen } from '../../app/models/imagen';
+import { ImagenFondo } from '../../app/models/imagenFondo';
 
 @Component({
    selector: 'page-home',
@@ -66,7 +66,11 @@ export class HomePage {
    idPersonaje: any;
    escena: Escena;
    dialogoActual: any;
-   listaFondos: Imagen [] = [];
+
+   listaFondos: ImagenFondo [] = [];
+   listaFondosDerecha: ImagenFondo [] = [];
+   listaFondosIzquierda: ImagenFondo [] = [];
+
 
    escenaFrames: EscenaFrames;
    frameActual: Frame;
@@ -85,34 +89,81 @@ constructor(public navCtrl: NavController, public storage: Storage, private rend
 
       //Escena para dibujar:
 
-      var imagen = new Imagen();
+      //Esto simula que nos llega una lista de fondos:
+      var imagen = new ImagenFondo();
       imagen.id = 0;
       imagen.src = '/assets/imgs/1.png';
-      var imagen2 = new Imagen();
+      imagen.pos = true;
+
+      var imagen2 = new ImagenFondo();
       imagen2.id = 1;
       imagen2.src = '/assets/imgs/2.png';
-      var imagen3 = new Imagen();
+      imagen2.pos = false;
+
+      var imagen3 = new ImagenFondo();
       imagen3.id = 2;
       imagen3.src = '/assets/imgs/3.png';
-      var imagen4 = new Imagen();
+      imagen3.pos = true;
+      
+      var imagen4 = new ImagenFondo();
       imagen4.id = 3;
       imagen4.src = '/assets/imgs/4.png';
- 
- 
+      imagen4.pos = false;
 
-      //Escena para dibujar:
+      var imagen5 = new ImagenFondo();
+      imagen5.id = 4;
+      imagen5.src = '/assets/imgs/4.png';
+      imagen5.pos = false;
+      
+      var imagen6 = new ImagenFondo();
+      imagen6.id = 5;
+      imagen6.src = '/assets/imgs/4.png';
+      imagen6.pos = false;
+
+      var imagen7 = new ImagenFondo();
+      imagen7.id = 6;
+      imagen7.src = '/assets/imgs/4.png';
+      imagen7.pos = false;
+
+      var imagen8 = new ImagenFondo();
+      imagen8.id = 7;
+      imagen8.src = '/assets/imgs/4.png';
+      imagen8.pos = false;
 
       this.listaFondos.push(imagen);
       this.listaFondos.push(imagen2);
       this.listaFondos.push(imagen3);
       this.listaFondos.push(imagen4);
+      this.listaFondos.push(imagen5);
+      this.listaFondos.push(imagen6);
+      this.listaFondos.push(imagen7);
+      this.listaFondos.push(imagen8);
+
      
+      //ahora vamos a generar las lista derecha y la lista izquierda:
+
+      this.generarListaFondos();
       
       
       
     
       
      
+   }
+
+   generarListaFondos()
+   {
+      this.listaFondos.forEach( fondo => {
+         if(fondo.id % 2 == 0)
+         {
+            this.listaFondosIzquierda.push(fondo);
+         }
+         else if (fondo.id % 2 != 0)
+         {
+            this.listaFondosDerecha.push(fondo);
+         }
+      })
+
    }
 
    borrarPersonajeEscena(personaje: Personaje, form: NgForm) {
