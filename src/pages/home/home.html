@@ -1,212 +1,116 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Cuentame</ion-title>
+  </ion-toolbar>
 </ion-header>
-
-
-<ion-content padding>
-  <div class="row">
+<ion-content fullscreen>
+  <ion-grid>
     <ion-row>
       <ion-col>
         <div class="ion-canvas">
           <canvas #canvas id="micanvas" (click)="fireEvent($event)"></canvas>
         </div>
-
-        <div class="row">
-          <h2>Elegir frames y duración del frame:</h2>
-          <ion-row>
-            <button ion-button color="primary" (click)="elejirNumeroFrames5()">
-              5 frames con 2 segundos por frame
-            </button>
-          </ion-row>
-          <ion-row>
-            <button ion-button color="primary" (click)="elejirNumeroFrames10()">
-              10 frames con 1 segundo por frame
-            </button>
-          </ion-row>
-
-        </div>
-
-        <ion-row>
-          <button ion-button color="primary" (click)="nuevoFrame()">
-            Nuevo frame
-          </button>
-        </ion-row>
-
-        <h3>Lista frames</h3>
-        <div *ngFor="let frame of listaFrames">
-          <ion-col align-self-center text-center>
-
-            <div (click)="cargarFrame(frame.numero)">
-              <h5>Frame número {{frame.numero}}</h5>
-              <img src={{frame.portadaFrame}} width="150" height="150">
-            </div>
-
-          </ion-col>
-        </div>
-
-        <button ion-button color="primary" (click)="guardarcanvas()">
-          guardarcanvas
-        </button>
-
-        <button ion-button color="primary" (click)="reconstruirEscena()">
-          Cargar Escena
-        </button>
-
-        <button ion-button color="primary" (click)="siguienteFrame()">
-          Siguiente fram
-        </button>
-
-        <button ion-button color="primary" (click)="reconstruirEscenaOnePicture()">
-          Escena demo
-        </button>
       </ion-col>
-    </ion-row>
-
-
-    <!-- ////////////////////////// fin de la primera columnaaaaaa/////////////////////////////////////////////////// -->
-
-
-    <ion-row>
-      <ion-col size-md="2" offset-md="6">
-
-        <h3>Personajes en escena</h3>
-        <div *ngFor="let personaje of listaPersonajeEscenaActual">
-          <ion-col align-self-center text-center>
-            <form #form3="ngForm" (ngSubmit)="borrarPersonajeEscena(personaje,form3)" method="post">
-              <ion-item>
-                <ion-label position="floating">{{personaje.id}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Tiempo de salida</ion-label>
-                <ion-input ngModel type="name" name="tiempo" placeholder="Tiempo"></ion-input>
-              </ion-item>
-              <button type="submit" ion-button icon-start clear small (click)="borrarPersonajeEscena(personaje,form3)">
-                <ion-icon name="text"></ion-icon>
-                <div>Quitar de la escena</div>
-              </button>
-
-            </form>
-
-          </ion-col>
-        </div>
-
-
-        <form #form="ngForm" (ngSubmit)="putText(form)" method="post">
-          <h3>Añadir Dialogo</h3>
-          <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input ngModel type="name" name="name" placeholder="Texto"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Tiempo</ion-label>
-            <ion-input ngModel type="name" name="tiempo" placeholder="Tiempo"></ion-input>
-          </ion-item>
-
-          <button type="submit" expand="full">Cargar texto</button>
-
-        </form>
-
-        <form #form2="ngForm" (ngSubmit)="putImage(form2)" method="post">
-          <h3>Añadir Personaje</h3>
-
-          <ion-item>
-            <ion-label position="floating">URL</ion-label>
-            <ion-input ngModel type="name" name="name" placeholder="url"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Tiempo entrada</ion-label>
-            <ion-input ngModel type="name" name="tiempoentrada" placeholder="Tiempo"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Nombre personaje</ion-label>
-            <ion-input ngModel type="name" name="id" placeholder="nombre"></ion-input>
-          </ion-item>
-
-          <button type="submit" expand="full">Cargar imagen</button>
-
-        </form>
-
-        <button ion-button color="primary" (click)="drawImageFondoMario()">
-          Cargar fondo
-        </button>
-        <div (click)="cargarMario()">
-          <img
-            src="https://lh3.googleusercontent.com/proxy/7sDbmzUkaIvidSgcL7STWmWBA7Gz0yfC8fAAru7oW4aG-gMIEqmRnDZgUVVsTkOF67lhjvXxQ_7T6U2H6QN0B6Unn3L_eqb8tk5EtYfDJkes768JI_U">
-        </div>
-        <button ion-button color="primary" (click)="cargaimagenFake()">
-          cargar Imagen cutre
-        </button>
-
-        <button ion-button color="primary" (click)="guardarcanvas()">
-          guardarcanvas
-        </button>
-
-        <button ion-button color="primary" (click)="startTimer()">
-          Mario movimiento
-        </button>
-
+      <ion-col>
+        <div>
 
           <ion-item>
 
             <button ion-button (click)="muestra()">VER FONDOS</button>
 
             <button ion-button (click)="oculta()">Ocultar fondos</button>
-            <div *ngIf="muestrame"> Tria un fondo
-              <h2>hihi</h2>
-
-
-
+            <div *ngIf="muestrame">
+              <h2>Elije un fondo</h2>
               <ion-grid>
-                <ion-row no-padding>
-                  <ion-col col-6 *ngFor="let fondo of listaFondos">
+                <ion-row>
 
-                    <img src={{fondo.src}} width="500" height="500">
+                  <ion-col>
+                    <ion-row *ngFor="let fondo of listaFondosIzquierda">
+                      <img src={{fondo.src}} width="360" height="360">
+                    </ion-row>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-row *ngFor="let fondo of listaFondosDerecha">
+                      <img src={{fondo.src}} width="360" height="360">
+                    </ion-row>
+                  </ion-col>
 
                 </ion-row>
+
               </ion-grid>
-              <!-- 
-            <ion-grid class="grid-categories">
-              <ion-row *ngFor="let imagen of listaFondos " >
-                <ion-col *ngIf="{{imagen.id}} % 2 == 0" >
-                  <img src={{imagen.src}} width="500" height="500" >
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-
-            <ion-grid class="grid-categories">
-              <ion-row *ngFor="let imagen of listaFondos" >
-                <ion-col *ngIf="{{imagen.id}} % 2 != 0" >
-                  <img src={{imagen.src}} width="500" height="500">
-                </ion-col>
-              </ion-row>
-            </ion-grid> -->
-
-
 
             </div>
-
 
           </ion-item>
 
 
 
-
-
-          </ion-col>
+        </div>
+      </ion-col>
     </ion-row>
-
-
-
-
-
-
-
-
-
-  </div>
+    <ion-row>
+      <ion-col>
+        <div>1 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>2 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>3 of 3</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>1 of 3</div>
+      </ion-col>
+      <ion-col col-6>
+        <div>2 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>3 of 3</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <div>1 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>2 of 3</div>
+      </ion-col>
+      <ion-col>
+        <div>3 of 3</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-4>
+        <div>1 of 2</div>
+      </ion-col>
+      <ion-col>
+        <div>2 of 2</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>1 of 2</div>
+      </ion-col>
+      <ion-col offset-4>
+        <div>2 of 2</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div>1 of 4</div>
+      </ion-col>
+      <ion-col>
+        <div>2 of 4</div>
+      </ion-col>
+      <ion-col>
+        <div>3 of 4</div>
+      </ion-col>
+      <ion-col>
+        <div>4 of 4</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
