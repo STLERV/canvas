@@ -26,13 +26,18 @@
 
                   <ion-col>
                     <ion-row *ngFor="let fondo of listaFondosIzquierda">
-                      <img src={{fondo.src}} width="360" height="360">
+                      <div (click) = "seleccionarfondo(fondo.src)">
+                        <img src={{fondo.src}} width="360" height="360">
+                      </div>
                     </ion-row>
                   </ion-col>
 
                   <ion-col>
                     <ion-row *ngFor="let fondo of listaFondosDerecha">
-                      <img src={{fondo.src}} width="360" height="360">
+                      <div (click) = "seleccionarfondo(fondo.src)">
+                        <img src={{fondo.src}} width="360" height="360">
+                      </div>
+
                     </ion-row>
                   </ion-col>
 
